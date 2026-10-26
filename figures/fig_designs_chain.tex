@@ -1,0 +1,15 @@
+\pgfplotsset{shortbar/.style={legend image code/.code={\draw[#1] (0cm,-0.07cm) rectangle (0.22cm,0.07cm);}}}
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=1.7cm}, width=0.52\textwidth, height=0.3\textwidth, title style={font=\footnotesize}, legend style={font=\scriptsize, draw=none, fill=none}]
+\nextgroupplot[ybar, bar width=2.6pt, title={(a) chain springs}, xlabel={spring $j$}, ylabel={$k_j/10^5$ [N/m]}, xmin=-0.7, xmax=11.7, ymin=0, ymax=5.4, xtick={0,...,11}, legend to name=legspr, legend columns=-1]
+  \addplot[shortbar, fill=gray!50, draw=gray] table[x=j, y=k_init] {\datapath n_design_chain_k.dat}; \addlegendentry{initial}
+  \addplot[shortbar, fill=blue!60!black, draw=blue!60!black] table[x=j, y=k_opt] {\datapath n_design_chain_k.dat}; \addlegendentry{springs only}
+  \addplot[shortbar, fill=orange!80!black, draw=orange!80!black] table[x=j, y=k_opt] {\datapath n_design_chain_km.dat}; \addlegendentry{springs and masses}
+\nextgroupplot[ybar, bar width=2.6pt, title={(b) chain masses}, xlabel={mass $i$}, ylabel={$m_i$ [kg]}, xmin=0.3, xmax=11.7, ymin=0, ymax=5.4, xtick={1,...,11}, legend to name=legmas, legend columns=-1]
+  \addplot[shortbar, fill=gray!50, draw=gray] table[x=i, y=m_init] {\datapath n_mass_chain_m.dat}; \addlegendentry{initial}
+  \addplot[shortbar, fill=blue!60!black, draw=blue!60!black] table[x=i, y=m_opt] {\datapath n_mass_chain_m.dat}; \addlegendentry{masses only}
+  \addplot[shortbar, fill=orange!80!black, draw=orange!80!black] table[x=i, y=m_opt] {\datapath n_mass_chain_km.dat}; \addlegendentry{springs and masses}
+\end{groupplot}
+\node[anchor=north] at (group c1r1.below south) [yshift=-0.05cm] {\pgfplotslegendfromname{legspr}};
+\node[anchor=north] at (group c2r1.below south) [yshift=-0.05cm] {\pgfplotslegendfromname{legmas}};
+\end{tikzpicture}

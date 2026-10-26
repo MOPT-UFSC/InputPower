@@ -1,0 +1,97 @@
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 3, horizontal sep=1.6cm, vertical sep=2.4cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\textwidth, height=0.32\textwidth,
+  xmode=log, ymode=log, xmin=5, xmax=3000, ymin=1e-11, ymax=1e-1, xlabel={$\omega$ [rad/s]}, ylabel={$P(\omega)$ [W]},
+  title style={font=\footnotesize}, legend style={font=\scriptsize, draw=none, fill=none}]
+\nextgroupplot[title={(a) chain, springs only}]
+  \addplot[gray, densely dotted] table[x=w, y=P] {\datapath n_relax_chain_k_P0.dat};
+  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_relax_chain_k_L0.dat};
+  \addplot[green!60!black] table[x=w, y=P] {\datapath n_relax_chain_k_L1.dat};
+  \addplot[teal!80!black] table[x=w, y=P] {\datapath n_relax_chain_k_L2.dat};
+  \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_relax_chain_k_L3.dat};
+  \addplot[blue!70!black] table[x=w, y=P] {\datapath n_relax_chain_k_L4.dat};
+  \addplot[violet!80!black] table[x=w, y=P] {\datapath n_relax_chain_k_L5.dat};
+  \addplot[yellow!75!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*0)] {\datapath n_relaxmodes_chain_k_L0.dat};
+  \addplot[green!60!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*1)] {\datapath n_relaxmodes_chain_k_L1.dat};
+  \addplot[teal!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*2)] {\datapath n_relaxmodes_chain_k_L2.dat};
+  \addplot[cyan!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*3)] {\datapath n_relaxmodes_chain_k_L3.dat};
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*4)] {\datapath n_relaxmodes_chain_k_L4.dat};
+  \addplot[violet!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*5)] {\datapath n_relaxmodes_chain_k_L5.dat};
+  \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-11) (300,1e-1)};
+\nextgroupplot[title={(b) truss, bars only}, legend to name=legk, legend columns=4]
+  \addplot[gray, densely dotted] table[x=w, y=P] {\datapath n_relax_truss_k_P0.dat}; \addlegendentry{initial}
+  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_relax_truss_k_L0.dat}; \addlegendentry{$k_{\min}=10^5$}
+  \addplot[green!60!black] table[x=w, y=P] {\datapath n_relax_truss_k_L1.dat}; \addlegendentry{$3\times10^4$}
+  \addplot[teal!80!black] table[x=w, y=P] {\datapath n_relax_truss_k_L2.dat}; \addlegendentry{$10^4$}
+  \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_relax_truss_k_L3.dat}; \addlegendentry{$3\times10^3$}
+  \addplot[blue!70!black] table[x=w, y=P] {\datapath n_relax_truss_k_L4.dat}; \addlegendentry{$10^3$}
+  \addplot[violet!80!black] table[x=w, y=P] {\datapath n_relax_truss_k_L5.dat}; \addlegendentry{$3\times10^2$}
+  \addplot[yellow!75!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*0)] {\datapath n_relaxmodes_truss_k_L0.dat};
+  \addplot[green!60!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*1)] {\datapath n_relaxmodes_truss_k_L1.dat};
+  \addplot[teal!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*2)] {\datapath n_relaxmodes_truss_k_L2.dat};
+  \addplot[cyan!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*3)] {\datapath n_relaxmodes_truss_k_L3.dat};
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*4)] {\datapath n_relaxmodes_truss_k_L4.dat};
+  \addplot[violet!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*5)] {\datapath n_relaxmodes_truss_k_L5.dat};
+  \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-11) (300,1e-1)};
+\nextgroupplot[title={(c) chain, masses only}]
+  \addplot[gray, densely dotted] table[x=w, y=P] {\datapath n_relax_chain_m_P0.dat};
+  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_relax_chain_m_L0.dat};
+  \addplot[green!60!black] table[x=w, y=P] {\datapath n_relax_chain_m_L1.dat};
+  \addplot[teal!80!black] table[x=w, y=P] {\datapath n_relax_chain_m_L2.dat};
+  \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_relax_chain_m_L3.dat};
+  \addplot[blue!70!black] table[x=w, y=P] {\datapath n_relax_chain_m_L4.dat};
+  \addplot[yellow!75!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*0)] {\datapath n_relaxmodes_chain_m_L0.dat};
+  \addplot[green!60!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*1)] {\datapath n_relaxmodes_chain_m_L1.dat};
+  \addplot[teal!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*2)] {\datapath n_relaxmodes_chain_m_L2.dat};
+  \addplot[cyan!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*3)] {\datapath n_relaxmodes_chain_m_L3.dat};
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*4)] {\datapath n_relaxmodes_chain_m_L4.dat};
+  \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-11) (300,1e-1)};
+\nextgroupplot[title={(d) truss, masses only}, legend to name=legm, legend columns=4]
+  \addplot[gray, densely dotted] table[x=w, y=P] {\datapath n_relax_truss_m_P0.dat}; \addlegendentry{initial}
+  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_relax_truss_m_L0.dat}; \addlegendentry{$[0.9,1.1]$}
+  \addplot[green!60!black] table[x=w, y=P] {\datapath n_relax_truss_m_L1.dat}; \addlegendentry{$[0.5,2]$}
+  \addplot[teal!80!black] table[x=w, y=P] {\datapath n_relax_truss_m_L2.dat}; \addlegendentry{$[0.25,4]$}
+  \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_relax_truss_m_L3.dat}; \addlegendentry{$[0.125,8]$}
+  \addplot[blue!70!black] table[x=w, y=P] {\datapath n_relax_truss_m_L4.dat}; \addlegendentry{$[0.1,10]$}
+  \addplot[violet!80!black] table[x=w, y=P] {\datapath n_relax_truss_m_L5.dat}; \addlegendentry{$[0.1,19.9]$}
+  \addplot[yellow!75!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*0)] {\datapath n_relaxmodes_truss_m_L0.dat};
+  \addplot[green!60!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*1)] {\datapath n_relaxmodes_truss_m_L1.dat};
+  \addplot[teal!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*2)] {\datapath n_relaxmodes_truss_m_L2.dat};
+  \addplot[cyan!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*3)] {\datapath n_relaxmodes_truss_m_L3.dat};
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*4)] {\datapath n_relaxmodes_truss_m_L4.dat};
+  \addplot[violet!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*5)] {\datapath n_relaxmodes_truss_m_L5.dat};
+  \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-11) (300,1e-1)};
+\nextgroupplot[title={(e) chain, springs and masses}]
+  \addplot[gray, densely dotted] table[x=w, y=P] {\datapath n_relax_chain_km_P0.dat};
+  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_relax_chain_km_L0.dat};
+  \addplot[green!60!black] table[x=w, y=P] {\datapath n_relax_chain_km_L1.dat};
+  \addplot[teal!80!black] table[x=w, y=P] {\datapath n_relax_chain_km_L2.dat};
+  \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_relax_chain_km_L3.dat};
+  \addplot[blue!70!black] table[x=w, y=P] {\datapath n_relax_chain_km_L4.dat};
+  \addplot[violet!80!black] table[x=w, y=P] {\datapath n_relax_chain_km_L5.dat};
+  \addplot[yellow!75!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*0)] {\datapath n_relaxmodes_chain_km_L0.dat};
+  \addplot[green!60!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*1)] {\datapath n_relaxmodes_chain_km_L1.dat};
+  \addplot[teal!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*2)] {\datapath n_relaxmodes_chain_km_L2.dat};
+  \addplot[cyan!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*3)] {\datapath n_relaxmodes_chain_km_L3.dat};
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*4)] {\datapath n_relaxmodes_chain_km_L4.dat};
+  \addplot[violet!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*5)] {\datapath n_relaxmodes_chain_km_L5.dat};
+  \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-11) (300,1e-1)};
+\nextgroupplot[title={(f) truss, bars and masses}, legend to name=legkm, legend columns=4]
+  \addplot[gray, densely dotted] table[x=w, y=P] {\datapath n_relax_truss_km_P0.dat}; \addlegendentry{initial}
+  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_relax_truss_km_L0.dat}; \addlegendentry{$10^5$, $[0.9,1.1]$}
+  \addplot[green!60!black] table[x=w, y=P] {\datapath n_relax_truss_km_L1.dat}; \addlegendentry{$3\times10^4$, $[0.5,2]$}
+  \addplot[teal!80!black] table[x=w, y=P] {\datapath n_relax_truss_km_L2.dat}; \addlegendentry{$10^4$, $[0.25,4]$}
+  \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_relax_truss_km_L3.dat}; \addlegendentry{$3\times10^3$, $[0.125,8]$}
+  \addplot[blue!70!black] table[x=w, y=P] {\datapath n_relax_truss_km_L4.dat}; \addlegendentry{$10^3$, $[0.1,10]$}
+  \addplot[violet!80!black] table[x=w, y=P] {\datapath n_relax_truss_km_L5.dat}; \addlegendentry{$3\times10^2$, $[0.1,19.9]$}
+  \addplot[yellow!75!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*0)] {\datapath n_relaxmodes_truss_km_L0.dat};
+  \addplot[green!60!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*1)] {\datapath n_relaxmodes_truss_km_L1.dat};
+  \addplot[teal!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*2)] {\datapath n_relaxmodes_truss_km_L2.dat};
+  \addplot[cyan!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*3)] {\datapath n_relaxmodes_truss_km_L3.dat};
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*4)] {\datapath n_relaxmodes_truss_km_L4.dat};
+  \addplot[violet!80!black, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*5)] {\datapath n_relaxmodes_truss_km_L5.dat};
+  \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-11) (300,1e-1)};
+\end{groupplot}
+\node[anchor=north] at ($(group c1r1.south west)!0.5!(group c2r1.south east)$) [yshift=-0.4cm] {\pgfplotslegendfromname{legk}};
+\node[anchor=north] at ($(group c1r2.south west)!0.5!(group c2r2.south east)$) [yshift=-0.4cm] {\pgfplotslegendfromname{legm}};
+\node[anchor=north] at ($(group c1r3.south west)!0.5!(group c2r3.south east)$) [yshift=-1.0cm] {\pgfplotslegendfromname{legkm}};
+\end{tikzpicture}

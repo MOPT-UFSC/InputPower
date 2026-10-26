@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.6cm, vertical sep=1.5cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\textwidth, height=0.34\textwidth,
+  ymode=log, xmin=0, xmax=1500, ymin=1e-6, ymax=1.5, xlabel={$\omega_r$ [rad/s]}, ylabel={$p_r/\mu_{\bm f}$}, title style={font=\footnotesize}, legend style={font=\tiny, at={(0.98,0.98)}, anchor=north east}]
+\nextgroupplot[title={(a) chain, adjacent pair $\bm e_6-\bm e_7$}]
+  \addplot[ycomb, blue!60!black, thick, mark=*, mark size=1.3pt] table[x=wr, y=share] {\datapath n_pairs_chain_adj_modes.dat}; \addlegendentry{final}
+  \addplot[red!70!black, dashed] coordinates {(300,1e-6) (300,1.5)}; \addlegendentry{$\omega$}
+\nextgroupplot[title={(b) truss, adjacent pair, nodes 16 and 17}]
+  \addplot[ycomb, blue!60!black, thick, mark=*, mark size=1.3pt] table[x=wr, y=share] {\datapath n_pairs_truss_adj_modes.dat}; \addlegendentry{final}
+  \addplot[red!70!black, dashed] coordinates {(300,1e-6) (300,1.5)}; \addlegendentry{$\omega$}
+\nextgroupplot[title={(c) chain, pair $\bm e_4-\bm e_8$}]
+  \addplot[ycomb, blue!60!black, thick, mark=*, mark size=1.3pt] table[x=wr, y=share] {\datapath n_pairs_chain_nonadj_modes.dat}; \addlegendentry{final}
+  \addplot[red!70!black, dashed] coordinates {(300,1e-6) (300,1.5)}; \addlegendentry{$\omega$}
+\nextgroupplot[title={(d) truss, pair, nodes 14 and 18}]
+  \addplot[ycomb, blue!60!black, thick, mark=*, mark size=1.3pt] table[x=wr, y=share] {\datapath n_pairs_truss_nonadj_modes.dat}; \addlegendentry{final}
+  \addplot[red!70!black, dashed] coordinates {(300,1e-6) (300,1.5)}; \addlegendentry{$\omega$}
+\end{groupplot}
+\end{tikzpicture}

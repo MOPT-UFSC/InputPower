@@ -1,0 +1,49 @@
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 3, horizontal sep=1.6cm, vertical sep=1.5cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\textwidth, height=0.36\textwidth,
+  xmode=log, ymode=log, xmin=0.7, xmax=1.5e5, xlabel={$s$}, ylabel={excited $\omega_r$ [rad/s]}, title style={font=\footnotesize},
+  legend style={font=\scriptsize, draw=none, fill=none}]
+\nextgroupplot[title={(a) chain, stiffness only}, ymin=0.3, ymax=3e5, legend to name=legfreq, legend columns=-1]
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.3pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_k_chain_opt.dat}; \addlegendentry{optimized designs}
+  \addplot[orange!80!black, only marks, mark=square*, mark size=1.1pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_k_chain_exp.dat}; \addlegendentry{explicit family}
+  \addplot[blue!70!black, thin, dashed] table[x=s, y=lo] {\datapath n_escape_k_chain_opt.dat}; \addlegendentry{excited gap, optimized}
+  \addplot[blue!70!black, thin, dashed, forget plot, unbounded coords=discard] table[x=s, y=hi] {\datapath n_escape_k_chain_opt.dat};
+  \addplot[red!70!black, dashed] coordinates {(0.7,300) (1.5e5,300)}; \addlegendentry{$\omega$}
+  \addplot[red!70!black, fill=red!70!black, fill opacity=0.07, draw=none, forget plot] coordinates {(0.7,150) (1.5e5,150) (1.5e5,600) (0.7,600)} \closedcycle;
+\nextgroupplot[title={(b) truss, stiffness only}, ymin=0.3, ymax=3e5]
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.3pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_k_truss_opt.dat};
+  \addplot[orange!80!black, only marks, mark=square*, mark size=1.1pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_k_truss_exp.dat};
+  \addplot[blue!70!black, thin, dashed] table[x=s, y=lo] {\datapath n_escape_k_truss_opt.dat};
+  \addplot[blue!70!black, thin, dashed, forget plot, unbounded coords=discard] table[x=s, y=hi] {\datapath n_escape_k_truss_opt.dat};
+  \addplot[red!70!black, dashed] coordinates {(0.7,300) (1.5e5,300)};
+  \addplot[red!70!black, fill=red!70!black, fill opacity=0.07, draw=none, forget plot] coordinates {(0.7,150) (1.5e5,150) (1.5e5,600) (0.7,600)} \closedcycle;
+\nextgroupplot[title={(c) chain, masses only}, ymin=0.1, ymax=3e3]
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.3pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_m_chain_opt.dat};
+  \addplot[orange!80!black, only marks, mark=square*, mark size=1.1pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_m_chain_exp.dat};
+  \addplot[blue!70!black, thin, dashed] table[x=s, y=lo] {\datapath n_escape_m_chain_opt.dat};
+  \addplot[blue!70!black, thin, dashed, forget plot, unbounded coords=discard] table[x=s, y=hi] {\datapath n_escape_m_chain_opt.dat};
+  \addplot[red!70!black, dashed] coordinates {(0.7,300) (1.5e5,300)};
+  \addplot[red!70!black, fill=red!70!black, fill opacity=0.07, draw=none, forget plot] coordinates {(0.7,150) (1.5e5,150) (1.5e5,600) (0.7,600)} \closedcycle;
+\nextgroupplot[title={(d) truss, masses only}, ymin=0.1, ymax=3e3]
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.3pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_m_truss_opt.dat};
+  \addplot[orange!80!black, only marks, mark=square*, mark size=1.1pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_m_truss_exp.dat};
+  \addplot[blue!70!black, thin, dashed] table[x=s, y=lo] {\datapath n_escape_m_truss_opt.dat};
+  \addplot[blue!70!black, thin, dashed, forget plot, unbounded coords=discard] table[x=s, y=hi] {\datapath n_escape_m_truss_opt.dat};
+  \addplot[red!70!black, dashed] coordinates {(0.7,300) (1.5e5,300)};
+  \addplot[red!70!black, fill=red!70!black, fill opacity=0.07, draw=none, forget plot] coordinates {(0.7,150) (1.5e5,150) (1.5e5,600) (0.7,600)} \closedcycle;
+\nextgroupplot[title={(e) chain, stiffness and masses}, ymin=0.1, ymax=3e3]
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.3pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_km_chain_opt.dat};
+  \addplot[orange!80!black, only marks, mark=square*, mark size=1.1pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_km_chain_exp.dat};
+  \addplot[blue!70!black, thin, dashed] table[x=s, y=lo] {\datapath n_escape_km_chain_opt.dat};
+  \addplot[blue!70!black, thin, dashed, forget plot, unbounded coords=discard] table[x=s, y=hi] {\datapath n_escape_km_chain_opt.dat};
+  \addplot[red!70!black, dashed] coordinates {(0.7,300) (1.5e5,300)};
+  \addplot[red!70!black, fill=red!70!black, fill opacity=0.07, draw=none, forget plot] coordinates {(0.7,150) (1.5e5,150) (1.5e5,600) (0.7,600)} \closedcycle;
+\nextgroupplot[title={(f) truss, stiffness and masses}, ymin=0.1, ymax=3e3]
+  \addplot[blue!70!black, only marks, mark=*, mark size=1.3pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_km_truss_opt.dat};
+  \addplot[orange!80!black, only marks, mark=square*, mark size=1.1pt, opacity=0.7] table[x=s, y=wr] {\datapath n_escapemodes_km_truss_exp.dat};
+  \addplot[blue!70!black, thin, dashed] table[x=s, y=lo] {\datapath n_escape_km_truss_opt.dat};
+  \addplot[blue!70!black, thin, dashed, forget plot, unbounded coords=discard] table[x=s, y=hi] {\datapath n_escape_km_truss_opt.dat};
+  \addplot[red!70!black, dashed] coordinates {(0.7,300) (1.5e5,300)};
+  \addplot[red!70!black, fill=red!70!black, fill opacity=0.07, draw=none, forget plot] coordinates {(0.7,150) (1.5e5,150) (1.5e5,600) (0.7,600)} \closedcycle;
+\end{groupplot}
+\node[anchor=north] at ($(group c1r3.south west)!0.5!(group c2r3.south east)$) [yshift=-1.05cm] {\pgfplotslegendfromname{legfreq}};
+\end{tikzpicture}
