@@ -1,0 +1,7 @@
+mode k thr 0.001: |S|=26, gradient check max rel err 1.6e-08
+s=     1: P_model=9.042e-05 P_full=9.042e-05 (ratio 1.000) |S|=19; strongest peak in [w/2, 2w]: 486.1 rad/s, share 1.4e-01, P(wr)/P(w0)=86.2; evals 1
+s=    10: P_model=1.345e-06 P_full=2.816e-06 (ratio 0.478) |S|=19; strongest peak in [w/2, 2w]: 152.4 rad/s, share 9.9e-04, P(wr)/P(w0)=59.3; evals 343
+s=   100: P_model=1.222e-07 P_full=4.068e-06 (ratio 0.030) |S|=16; strongest peak in [w/2, 2w]: 220.3 rad/s, share 6.8e-04, P(wr)/P(w0)=19.1; evals 391
+s=  1000: P_model=1.247e-08 P_full=1.271e-05 (ratio 0.001) |S|=16; strongest peak in [w/2, 2w]: 218.1 rad/s, share 6.8e-04, P(wr)/P(w0)=6.2; evals 428
+s= 10000: P_model=1.217e-09 P_full=4.244e-05 (ratio 0.000) |S|=14; strongest peak in [w/2, 2w]: 217.8 rad/s, share 6.8e-04, P(wr)/P(w0)=1.9; evals 488
+written escape_trunc_k_thr0.001.png

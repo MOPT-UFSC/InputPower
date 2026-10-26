@@ -1,0 +1,41 @@
+chain gradient check: k 2.1e-10, m 9.0e-09
+truss gradient check: k 2.1e-10, m 2.3e-09
+=== case chain_relax
+chain_relax_k_L0                   P=4.442e-05  mu=1.000  gap [  244.1,   392.5]  iters=9
+chain_relax_k_L1                   P=1.174e-05  mu=1.000  gap [  176.5,   442.0]  iters=24
+chain_relax_k_L2                   P=8.332e-06  mu=1.000  gap [  108.4,   557.4]  iters=20
+chain_relax_k_L3                   P=7.425e-06  mu=1.000  gap [   60.5,   568.2]  iters=22
+chain_relax_k_L4                   P=5.600e-06  mu=1.000  gap [   30.3,   612.7]  iters=28
+chain_relax_k_L5                   P=5.514e-06  mu=1.000  gap [   16.6,   614.6]  iters=32
+chain_relax_m_L0                   P=5.701e-05  mu=0.909  gap [  249.5,   404.8]  iters=8
+chain_relax_m_L1                   P=1.766e-05  mu=0.500  gap [  214.5,   431.1]  iters=22
+chain_relax_m_L2                   P=3.052e-06  mu=0.250  gap [  192.9,   541.9]  iters=12
+chain_relax_m_L3                   P=1.323e-06  mu=0.125  gap [   64.6,   369.3]  iters=22
+chain_relax_m_L4                   P=1.856e-07  mu=0.100  gap [   59.7,   553.7]  iters=11
+chain_relax_m_L5                   P=1.856e-07  mu=0.100  gap [   59.7,   553.7]  iters=2
+chain_relax_km_L0                  P=3.446e-05  mu=0.909  gap [  239.4,   401.1]  iters=17
+chain_relax_km_L1                  P=3.196e-06  mu=0.500  gap [  149.7,   849.2]  iters=51
+chain_relax_km_L2                  P=4.193e-07  mu=0.250  gap [   88.7,  1460.8]  iters=66
+chain_relax_km_L3                  P=3.554e-08  mu=0.125  gap [   68.2,  2036.8]  iters=65
+chain_relax_km_L4                  P=8.784e-09  mu=0.100  gap [   80.9,  2260.5]  iters=38
+chain_relax_km_L5                  P=3.368e-09  mu=0.100  gap [   44.8,  2259.0]  iters=37
+=== case truss_relax
+truss_relax_k_L0                   P=3.716e-05  mu=1.000  gap [  262.5,   378.7]  iters=29
+truss_relax_k_L1                   P=5.662e-06  mu=1.000  gap [  164.7,   617.4]  iters=79
+truss_relax_k_L2                   P=3.858e-06  mu=1.000  gap [  101.8,   595.8]  iters=174
+truss_relax_k_L3                   P=3.476e-06  mu=1.000  gap [   53.2,   596.2]  iters=117
+truss_relax_k_L4                   P=3.395e-06  mu=1.000  gap [   30.8,   600.1]  iters=158
+truss_relax_k_L5                   P=3.367e-06  mu=1.000  gap [   16.9,   601.8]  iters=184
+truss_relax_m_L0                   P=5.740e-05  mu=0.909  gap [  260.5,   379.5]  iters=9
+truss_relax_m_L1                   P=2.094e-05  mu=0.500  gap [  228.4,   369.4]  iters=37
+truss_relax_m_L2                   P=2.796e-06  mu=0.250  gap [  188.1,   520.2]  iters=61
+truss_relax_m_L3                   P=5.326e-07  mu=0.125  gap [  183.4,   749.1]  iters=22
+truss_relax_m_L4                   P=3.612e-07  mu=0.100  gap [  199.6,   833.7]  iters=21
+truss_relax_m_L5                   P=3.190e-07  mu=0.084  gap [  221.6,     nan]  iters=13
+truss_relax_km_L0                  P=2.602e-05  mu=0.909  gap [  255.0,   378.5]  iters=29
+truss_relax_km_L1                  P=2.186e-06  mu=0.500  gap [  147.9,   687.1]  iters=183
+truss_relax_km_L2                  P=3.542e-07  mu=0.250  gap [   80.9,   981.9]  iters=243
+truss_relax_km_L3                  P=3.034e-08  mu=0.125  gap [   39.9,  1306.5]  iters=455
+truss_relax_km_L4                  P=8.928e-09  mu=0.100  gap [   63.2,  1492.8]  iters=3000
+truss_relax_km_L5                  P=1.489e-09  mu=0.050  gap [   24.9,  1552.0]  iters=256
+done

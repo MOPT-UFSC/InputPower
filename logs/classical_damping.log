@@ -1,0 +1,13 @@
+Caughey (a0, a1, a2) = (5, 1e-05, 1e-12): direct 8.419439e-05 W, modal sum 8.419439e-05 W, relative difference 8.0e-16
+prescribed modal ratios in [0.01, 0.03]: direct 1.089890e-04 W, modal sum 1.089890e-04 W, relative difference 7.5e-16
+hysteretic eta = 0.02, B = [w/2, 2w]: g_B = 2.961e-05 s, participation in B = 0.490, Theorem 1 lower bound on P = 7.259e-06 W
+  dashpot c = 0e+00 N s/m at the loaded mass: P = 7.464e-05 W, |F|^2/(2c) = inf, bound holds: True
+  dashpot c = 1e+01 N s/m at the loaded mass: P = 8.286e-05 W, |F|^2/(2c) = 5.00e-02, bound holds: True
+  dashpot c = 1e+02 N s/m at the loaded mass: P = 1.523e-04 W, |F|^2/(2c) = 5.00e-03, bound holds: True
+  dashpot c = 1e+03 N s/m at the loaded mass: P = 3.082e-04 W, |F|^2/(2c) = 5.00e-04, bound holds: True
+  dashpot c = 3e+03 N s/m at the loaded mass: P = 1.526e-04 W, |F|^2/(2c) = 1.67e-04, bound holds: True
+  dashpot c = 1e+04 N s/m at the loaded mass: P = 4.928e-05 W, |F|^2/(2c) = 5.00e-05, bound holds: True
+  dashpot c = 1e+05 N s/m at the loaded mass: P = 4.995e-06 W, |F|^2/(2c) = 5.00e-06, bound holds: False
+  dashpot c = 1e+06 N s/m at the loaded mass: P = 5.000e-07 W, |F|^2/(2c) = 5.00e-07, bound holds: False
+  the bound fails beyond c = 6.88e+04 N s/m
+  maximum of P(c) at c = 6.8e+02 N s/m, P = 3.278e-04 W

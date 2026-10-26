@@ -1,0 +1,21 @@
+chain point force at $m_6$                       modal-sum err 6.9e-14  mu_f=1.000  sum rule 1.56080 vs 1.56080
+chain in-phase pair $m_4$, $m_8$                 modal-sum err 7.2e-14  mu_f=2.000  sum rule 3.12159 vs 3.12160
+chain antiphase pair $m_4$, $m_8$                modal-sum err 2.6e-14  mu_f=2.000  sum rule 3.12159 vs 3.12160
+chain adjacent antiphase pair $m_6$, $m_7$       modal-sum err 1.1e-13  mu_f=2.000  sum rule 3.12159 vs 3.12160
+chain random load at all masses                  modal-sum err 6.6e-14  mu_f=4.815  sum rule 7.51468 vs 7.51468
+   51 starts, 33 distinct minima, best from random 15
+chain adj      P0=1.318e-04 P=6.861e-06 ratio 19.2 mu=2.000 gap [nan, 1035.3] iters 452; top modes: 1035 (0.99); 753 (0.01); 191 (0.00); k at kmin 5, at kmax 1
+   51 starts, 43 distinct minima, best from random 1
+chain nonadj   P0=4.348e-04 P=8.627e-06 ratio 50.4 mu=2.000 gap [145.7, 940.8] iters 34; top modes: 941 (0.33); 67 (0.28); 941 (0.25); k at kmin 6, at kmax 0
+chain nonadj Lemma 4: path springs [4, 5, 6, 7], sum 1/k = 2.163e-04; lowest excited modes: wr=33.9 p=0.001 bound=0.248; wr=67.0 p=0.554 bound=0.970; wr=104.0 p=0.068 bound=2.338
+truss vertical force at node 16                  modal-sum err 1.3e-12  mu_f=1.000  sum rule 1.56080 vs 1.56080
+truss in-phase pair, nodes 14, 18                modal-sum err 1.3e-12  mu_f=2.000  sum rule 3.12159 vs 3.12160
+truss antiphase pair, nodes 14, 18               modal-sum err 3.6e-13  mu_f=2.000  sum rule 3.12159 vs 3.12160
+truss adjacent antiphase pair, nodes 16, 17      modal-sum err 1.3e-12  mu_f=2.000  sum rule 3.12159 vs 3.12160
+truss random load at all free dofs               modal-sum err 1.3e-12  mu_f=31.382  sum rule 48.98127 vs 48.98128
+   51 starts, 49 distinct minima, best from initial
+truss adj      P0=2.075e-04 P=8.871e-06 ratio 23.4 mu=2.000 gap [102.6, 680.7] iters 214; top modes: 846 (0.42); 1252 (0.38); 681 (0.05); k at kmin 32, at kmax 4
+   51 starts, 47 distinct minima, best from random 3
+truss nonadj   P0=1.942e-04 P=7.555e-06 ratio 25.7 mu=2.000 gap [152.2, 777.2] iters 174; top modes: 1272 (0.23); 1207 (0.20); 31 (0.20); k at kmin 30, at kmax 3
+truss nonadj Lemma 4: path springs [13, 14, 15, 16], sum 1/k = 4.000e-04; lowest excited modes: wr=11.4 p=0.002 bound=0.052; wr=31.1 p=0.393 bound=0.387; wr=43.2 p=0.002 bound=0.747
+done

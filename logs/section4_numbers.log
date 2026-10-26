@@ -1,0 +1,59 @@
+=== Table 1
+chain k  P=2.599e-06 P0/P=29 mu=1.00 gap [126,1226] Cor9 [251,358] P/mu=2.599e-06 s; distinct 39/52; max share inside gap 1.5e-03 at 177; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [ 177. 1226.] [ 126. 1226.] [  91. 1226.]; lowest excited 27.7; zero-share modes 5 (inside gap 3); m_load 1.00
+chain m  P=1.575e-06 P0/P=47 mu=0.20 gap [215,672] Cor9 [271,332] P/mu=7.873e-06 s; distinct 28/52; max share inside gap 0.0e+00 at 0; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [215. 672.] [215. 672.] [80. inf]; lowest excited 80.3; zero-share modes 0 (inside gap 0); m_load 5.00
+chain km P=2.215e-07 P0/P=337 mu=0.20 gap [75,1916] Cor9 [229,393] P/mu=1.107e-06 s; distinct 32/52; max share inside gap 5.9e-03 at 510; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [ 75. 510.] [  75. 1916.] [75. inf]; lowest excited 25.2; zero-share modes 0 (inside gap 0); m_load 5.00
+truss k  P=3.036e-06 P0/P=29 mu=1.00 gap [137,603] Cor9 [254,354] P/mu=3.036e-06 s; distinct 46/52; max share inside gap 2.1e-04 at 414; within 20%: 2.2e-06; gaps thr 1e-3/1e-2/1e-1: [137. 603.] [137. 603.] [  12. 1130.]; lowest excited 12.0; zero-share modes 18 (inside gap 9); m_load 1.00
+truss m  P=9.135e-07 P0/P=97 mu=0.20 gap [177,558] Cor9 [262,343] P/mu=4.567e-06 s; distinct 38/52; max share inside gap 2.7e-03 at 199; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [238. 558.] [177. 558.] [114.  inf]; lowest excited 31.0; zero-share modes 0 (inside gap 0); m_load 5.00
+truss km P=1.059e-07 P0/P=836 mu=0.20 gap [76,884] Cor9 [204,442] P/mu=5.297e-07 s; distinct 51/52; max share inside gap 2.6e-03 at 86; within 20%: 3.1e-07; gaps thr 1e-3/1e-2/1e-1: [ 86. 884.] [ 76. 884.] [36. inf]; lowest excited 10.3; zero-share modes 0 (inside gap 0); m_load 5.00
+requirement B=[0.8w,1.2w], tau=1e-2: P/mu < 1.644e-06 s
+=== relaxation last levels
+chain relax k  L0 P=4.442e-05 mu=1.000 gap [244.1, 393] top mode 737.8 rad/s share 0.51; m_load 1.00
+chain relax k  L5 P=5.514e-06 mu=1.000 gap [16.6, 615] top mode 1103.8 rad/s share 0.50; m_load 1.00
+chain relax m  L0 P=5.701e-05 mu=0.909 gap [249.5, 405] top mode 541.5 rad/s share 0.22; m_load 1.10
+chain relax m  L5 P=1.856e-07 mu=0.100 gap [59.7, 554] top mode 59.7 rad/s share 0.97; m_load 10.00
+chain relax km L0 P=3.446e-05 mu=0.909 gap [239.4, 401] top mode 708.5 rad/s share 0.46; m_load 1.10
+chain relax km L5 P=3.368e-09 mu=0.100 gap [44.8, 2259] top mode 5.3 rad/s share 0.97; m_load 10.00
+truss relax k  L0 P=3.716e-05 mu=1.000 gap [262.5, 379] top mode 911.6 rad/s share 0.53; m_load 1.00
+truss relax k  L5 P=3.367e-06 mu=1.000 gap [16.9, 602] top mode 1329.0 rad/s share 0.40; m_load 1.00
+truss relax m  L0 P=5.740e-05 mu=0.909 gap [260.5, 380] top mode 486.7 rad/s share 0.19; m_load 1.10
+truss relax m  L5 P=3.190e-07 mu=0.084 gap [221.6, inf] top mode 24.2 rad/s share 0.80; m_load 11.84
+truss relax km L0 P=2.602e-05 mu=0.909 gap [255.0, 379] top mode 883.1 rad/s share 0.47; m_load 1.10
+truss relax km L5 P=1.489e-09 mu=0.050 gap [24.9, 1552] top mode 1.5 rad/s share 0.97; m_load 19.90
+=== escape k: two factors of the slack
+k chain s=1: share 5.0e-01 bound 5.0e+00 bound/share 1.0e+01 P_B/P 9.37e-01 weight factor 9.4; explicit P 7.450e-05 opt P 7.450e-05 ratio 1.00
+k chain s=100000: share 8.8e-13 bound 9.5e-06 bound/share 1.1e+07 P_B/P 1.53e-07 weight factor 1.7; explicit P 8.197e-10 opt P 1.412e-10 ratio 5.81
+k truss s=1: share 5.3e-01 bound 6.1e+00 bound/share 1.2e+01 P_B/P 9.56e-01 weight factor 11.0; explicit P 9.042e-05 opt P 9.042e-05 ratio 1.00
+k truss s=100000: share 1.7e-13 bound 8.3e-06 bound/share 4.9e+07 P_B/P 3.56e-08 weight factor 1.7; explicit P 8.183e-10 opt P 1.224e-10 ratio 6.69
+m chain s=1: share 4.9e-01 bound 5.0e+00 bound/share 1.0e+01 P_B/P 9.37e-01 weight factor 9.6; explicit P 7.464e-05 opt P 7.464e-05 ratio 1.00
+m chain s=100000: share 0.0e+00 bound 9.2e-06 bound/share nan P_B/P 0.00e+00 weight factor nan; explicit P 1.363e-15 opt P 1.363e-15 ratio 1.00
+m truss s=1: share 5.5e-01 bound 6.0e+00 bound/share 1.1e+01 P_B/P 9.58e-01 weight factor 10.5; explicit P 8.851e-05 opt P 8.851e-05 ratio 1.00
+m truss s=100000: share 0.0e+00 bound 2.1e-06 bound/share nan P_B/P 0.00e+00 weight factor nan; explicit P 3.176e-16 opt P 3.176e-16 ratio 1.00
+km chain s=1: share 5.0e-01 bound 5.0e+00 bound/share 1.0e+01 P_B/P 9.37e-01 weight factor 9.4; explicit P 7.450e-05 opt P 7.450e-05 ratio 1.00
+km chain s=10000: share 3.4e-09 bound 3.8e-08 bound/share 1.1e+01 P_B/P 1.48e-01 weight factor 1.7; explicit P 8.197e-17 opt P 5.677e-17 ratio 1.44
+km truss s=1: share 5.3e-01 bound 6.1e+00 bound/share 1.2e+01 P_B/P 9.56e-01 weight factor 11.0; explicit P 9.042e-05 opt P 9.042e-05 ratio 1.00
+km truss s=10000: share 6.1e-10 bound 1.9e-08 bound/share 3.2e+01 P_B/P 3.94e-02 weight factor 1.2; explicit P 8.182e-17 opt P 2.854e-17 ratio 2.87
+=== near-orthogonal modes inside the gap (truss), shares < 1e-5, 250-700 rad/s
+  k s=1: 12 modes, 331-664 rad/s, shares 7e-32-4e-28
+  k s=3: 9 modes, 253-671 rad/s, shares 8e-19-5e-06
+  k s=10: 4 modes, 265-508 rad/s, shares 3e-16-2e-08
+  k s=30: 4 modes, 313-515 rad/s, shares 2e-13-2e-06
+  k s=100: 4 modes, 311-518 rad/s, shares 6e-16-1e-07
+  k s=300: 4 modes, 310-519 rad/s, shares 4e-18-1e-08
+  k s=1000: 4 modes, 310-519 rad/s, shares 2e-20-9e-10
+  k s=3000: 4 modes, 320-522 rad/s, shares 7e-14-1e-10
+  k s=10000: 4 modes, 321-522 rad/s, shares 8e-15-9e-12
+  k s=30000: 4 modes, 321-522 rad/s, shares 8e-16-1e-12
+  k s=100000: 4 modes, 321-522 rad/s, shares 6e-17-8e-14
+  km s=1: 12 modes, 331-664 rad/s, shares 7e-32-4e-28
+  km s=3: 9 modes, 253-656 rad/s, shares 2e-19-3e-07
+  km s=10: 8 modes, 260-640 rad/s, shares 2e-21-2e-09
+  km s=30: 11 modes, 254-649 rad/s, shares 1e-21-6e-06
+  km s=100: 13 modes, 253-649 rad/s, shares 7e-24-3e-06
+  km s=300: 13 modes, 253-649 rad/s, shares 3e-18-3e-07
+  km s=1000: 13 modes, 253-649 rad/s, shares 6e-20-3e-08
+  km s=3000: 12 modes, 314-610 rad/s, shares 5e-21-3e-09
+  km s=10000: 12 modes, 314-610 rad/s, shares 3e-20-3e-10
+  Table1 chain k: 1 modes 508-508 rad/s shares 1e-30-1e-30
+  Table1 chain km: 1 modes 508-508 rad/s shares 9e-06-9e-06
+  Table1 truss k: 8 modes 275-585 rad/s shares 1e-34-2e-06
+  Table1 truss km: 7 modes 284-622 rad/s shares 2e-09-3e-06

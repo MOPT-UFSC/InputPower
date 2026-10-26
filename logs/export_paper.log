@@ -1,0 +1,86 @@
+chain: proportional modal sum max rel err 1.0e-13; localised dashpot: min P_r/P = -310, max = 379
+truss: proportional modal sum max rel err 1.5e-12; localised dashpot: min P_r/P = -1.38e+03, max = 4.46e+03
+
+constrained (sum fixed, box [1e4,5e5], m in [0.1,5]):
+  chain k  P0=7.464e-05 P=2.599e-06 P0/P=  28.7 mu=1.000 gap [ 126.3,  1226.1] max share within 20% of w: 0.0e+00  iters 1  start symmetric multi-start  m_load 1.00
+     modes with zero participation (share < 1e-20): 5, of which inside the excited gap 3; mirror asymmetry max|k-k_mirror|/kmax = 0.0e+00; distinct minima 39 of 52 starts
+  chain m  P0=7.464e-05 P=1.575e-06 P0/P=  47.4 mu=0.200 gap [ 214.5,   672.3] max share within 20% of w: 0.0e+00  iters 18  start random 4  m_load 5.00
+     distinct minima 28 of 52 starts
+  chain km P0=7.464e-05 P=2.215e-07 P0/P= 337.0 mu=0.200 gap [  75.3,  1915.9] max share within 20% of w: 0.0e+00  iters 112  start random 31  m_load 5.00
+     distinct minima 32 of 52 starts
+  chain relax k  L0 P=4.442e-05 mu=1.000 gap [ 244.1,   392.5] iters 8
+  chain relax k  L1 P=1.174e-05 mu=1.000 gap [ 176.5,   442.0] iters 23
+  chain relax k  L2 P=8.332e-06 mu=1.000 gap [ 108.4,   557.4] iters 19
+  chain relax k  L3 P=7.425e-06 mu=1.000 gap [  60.5,   568.2] iters 21
+  chain relax k  L4 P=5.600e-06 mu=1.000 gap [  30.3,   612.7] iters 27
+  chain relax k  L5 P=5.514e-06 mu=1.000 gap [  16.6,   614.6] iters 31
+  chain relax m  L0 P=5.701e-05 mu=0.909 gap [ 249.5,   404.8] iters 7
+  chain relax m  L1 P=1.766e-05 mu=0.500 gap [ 214.5,   431.1] iters 21
+  chain relax m  L2 P=3.052e-06 mu=0.250 gap [ 192.9,   541.9] iters 11
+  chain relax m  L3 P=1.323e-06 mu=0.125 gap [  64.6,   369.3] iters 21
+  chain relax m  L4 P=1.856e-07 mu=0.100 gap [  59.7,   553.7] iters 10
+  chain relax m  L5 P=1.856e-07 mu=0.100 gap [  59.7,   553.7] iters 1
+  chain relax km L0 P=3.446e-05 mu=0.909 gap [ 239.4,   401.1] iters 16
+  chain relax km L1 P=3.196e-06 mu=0.500 gap [ 149.7,   849.2] iters 50
+  chain relax km L2 P=4.193e-07 mu=0.250 gap [  88.7,  1460.8] iters 65
+  chain relax km L3 P=3.554e-08 mu=0.125 gap [  68.2,  2036.8] iters 64
+  chain relax km L4 P=8.784e-09 mu=0.100 gap [  80.9,  2260.5] iters 37
+  chain relax km L5 P=3.368e-09 mu=0.100 gap [  44.8,  2259.0] iters 36
+  truss k  P0=8.851e-05 P=3.036e-06 P0/P=  29.2 mu=1.000 gap [ 137.2,   602.6] max share within 20% of w: 2.2e-06  iters 1  start symmetric multi-start  m_load 1.00
+     modes with zero participation (share < 1e-20): 18, of which inside the excited gap 9; mirror asymmetry max|k-k_mirror|/kmax = 0.0e+00; distinct minima 46 of 52 starts
+  truss m  P0=8.851e-05 P=9.135e-07 P0/P=  96.9 mu=0.200 gap [ 176.9,   557.6] max share within 20% of w: 0.0e+00  iters 44  start random 36  m_load 5.00
+     distinct minima 38 of 52 starts
+  truss km P0=8.851e-05 P=1.059e-07 P0/P= 835.5 mu=0.200 gap [  76.1,   883.7] max share within 20% of w: 3.1e-07  iters 414  start random 43  m_load 5.00
+     distinct minima 51 of 52 starts
+  truss relax k  L0 P=3.716e-05 mu=1.000 gap [ 262.5,   378.7] iters 28
+  truss relax k  L1 P=5.662e-06 mu=1.000 gap [ 164.7,   617.4] iters 78
+  truss relax k  L2 P=3.858e-06 mu=1.000 gap [ 101.8,   595.8] iters 173
+  truss relax k  L3 P=3.476e-06 mu=1.000 gap [  53.2,   596.2] iters 116
+  truss relax k  L4 P=3.395e-06 mu=1.000 gap [  30.8,   600.1] iters 157
+  truss relax k  L5 P=3.367e-06 mu=1.000 gap [  16.9,   601.8] iters 183
+  truss relax m  L0 P=5.740e-05 mu=0.909 gap [ 260.5,   379.5] iters 8
+  truss relax m  L1 P=2.094e-05 mu=0.500 gap [ 228.4,   369.4] iters 36
+  truss relax m  L2 P=2.796e-06 mu=0.250 gap [ 188.1,   520.2] iters 60
+  truss relax m  L3 P=5.326e-07 mu=0.125 gap [ 183.4,   749.1] iters 21
+  truss relax m  L4 P=3.612e-07 mu=0.100 gap [ 199.6,   833.7] iters 20
+  truss relax m  L5 P=3.190e-07 mu=0.084 gap [ 221.6,     nan] iters 12
+  truss relax km L0 P=2.602e-05 mu=0.909 gap [ 255.0,   378.5] iters 28
+  truss relax km L1 P=2.186e-06 mu=0.500 gap [ 147.9,   687.1] iters 182
+  truss relax km L2 P=3.542e-07 mu=0.250 gap [  80.9,   981.9] iters 242
+  truss relax km L3 P=3.034e-08 mu=0.125 gap [  39.9,  1306.5] iters 454
+  truss relax km L4 P=8.928e-09 mu=0.100 gap [  63.2,  1492.8] iters 2999
+  truss relax km L5 P=1.489e-09 mu=0.050 gap [  24.9,  1552.0] iters 255
+
+pairs:
+  chain adj    P0=1.318e-04 P=6.861e-06 ratio 19.2 gap [   nan,  1035.3]; k at kmin 5, kmax 1
+  chain nonadj P0=4.348e-04 P=8.627e-06 ratio 50.4 gap [ 145.7,   940.8]; k at kmin 6, kmax 0
+  truss adj    P0=2.075e-04 P=8.871e-06 ratio 23.4 gap [ 102.6,   680.7]; k at kmin 32, kmax 4
+  truss nonadj P0=1.942e-04 P=7.555e-06 ratio 25.7 gap [ 152.2,   777.2]; k at kmin 30, kmax 3
+
+escape:
+  spectra k chain: points kept per curve [319, 318, 317, 312, 300, 287] of 4000
+  k  chain opt P: 7.45e-05 7.28e-06 1.59e-06 4.89e-07 1.43e-07 4.72e-08 1.41e-08 4.71e-09 1.41e-09 4.71e-10 1.41e-10 ; mu: 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00
+          gap lo: 254.60 178.12 100.33 58.21 31.93 18.44 13.02 3.64 2.07 1.21 0.66 ; hi: 405 694 1239 2142 3911 6773 12366 21419 39106 67734 123664
+          exp P: 7.45e-05 5.74e-03 1.87e-04 3.22e-06 8.61e-07 2.78e-07 8.24e-08 2.74e-08 8.20e-09 2.73e-09 8.20e-10
+  spectra k truss: points kept per curve [361, 409, 411, 401, 395, 381] of 4000
+  k  truss opt P: 9.04e-05 6.35e-06 1.38e-06 4.24e-07 1.24e-07 4.09e-08 1.22e-08 4.08e-09 1.22e-09 4.08e-10 1.22e-10 ; mu: 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00 1.0e+00
+          gap lo: 270.21 183.17 104.61 60.84 33.38 19.28 12.48 5.01 2.81 1.63 0.90 ; hi: 385 551 940 1688 3079 5333 9736 16863 30787 53325 97358
+          exp P: 9.04e-05 2.70e-02 1.61e-05 3.38e-06 1.47e-06 2.77e-07 8.22e-08 2.73e-08 8.19e-09 2.73e-09 8.18e-10
+  spectra m chain: points kept per curve [313, 326, 332, 345, 346, 354] of 4000
+  m  chain opt P: 7.46e-05 1.73e-05 1.86e-07 1.58e-08 1.38e-09 1.52e-10 1.36e-11 1.51e-12 1.36e-13 1.51e-14 1.36e-15 ; mu: 1.0e+00 3.0e+00 1.0e-01 3.3e-02 1.0e-02 3.3e-03 1.0e-03 3.3e-04 1.0e-04 3.3e-05 1.0e-05
+          gap lo: 254.54 178.05 59.74 34.96 19.18 11.07 6.07 3.50 1.92 1.11 0.61 ; hi: 398 845 554 none none none none none none none none
+          exp P: 7.46e-05 5.39e-05 1.86e-07 1.58e-08 1.38e-09 1.52e-10 1.36e-11 1.51e-12 1.36e-13 1.51e-14 1.36e-15
+  spectra m truss: points kept per curve [364, 394, 387, 390, 397, 409] of 4000
+  m  truss opt P: 8.85e-05 9.99e-06 2.39e-07 6.35e-09 3.33e-10 3.55e-11 3.18e-12 3.53e-13 3.18e-14 3.53e-15 3.18e-16 ; mu: 1.0e+00 3.3e-01 1.0e-01 3.3e-02 1.0e-02 3.3e-03 1.0e-03 3.3e-04 1.0e-04 3.3e-05 1.0e-05
+          gap lo: 270.14 203.75 161.82 16.85 9.26 5.35 2.93 1.69 0.93 0.53 0.29 ; hi: 385 380 456 none none none none none none none none
+          exp P: 8.85e-05 1.00e-05 3.23e-06 6.35e-09 3.33e-10 3.55e-11 3.18e-12 3.53e-13 3.18e-14 3.53e-15 3.18e-16
+  spectra km chain: points kept per curve [319, 351, 331, 326] of 4000
+  km chain opt P: 7.45e-05 2.08e-06 5.67e-08 2.10e-09 5.68e-11 2.10e-12 5.68e-14 ; mu: 1.0e+00 3.3e-01 1.0e-01 3.3e-02 1.0e-02 3.3e-03 1.0e-03
+          gap lo: 254.60 153.48 48.54 15.55 5.56 2.73 0.36 ; hi: 405 480 2584 none none none none
+          exp P: 7.45e-05 9.70e-06 8.19e-08 3.04e-09 8.20e-11 3.04e-12 8.20e-14
+  spectra km truss: points kept per curve [361, 427, 438, 408] of 4000
+  km truss opt P: 9.04e-05 1.60e-06 3.07e-08 1.07e-09 2.86e-11 1.06e-12 2.85e-14 ; mu: 1.0e+00 3.3e-01 1.0e-01 3.3e-02 1.0e-02 3.3e-03 1.0e-03
+          gap lo: 270.21 135.03 42.42 14.45 4.63 1.60 0.48 ; hi: 385 557 1663 none none none none
+          exp P: 9.04e-05 1.30e-05 2.89e-07 2.91e-09 8.15e-11 3.03e-12 8.18e-14
+
+written data/n_*.dat, fig_truss_model.tex, fig_truss_designs.tex
