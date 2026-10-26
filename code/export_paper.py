@@ -2,7 +2,7 @@
 Reads results/*.npz and results/escape_seq_*.npy produced by run_cases.py, run_pairs.py and escape_seq.py."""
 import os, numpy as np
 from scipy.linalg import eigh
-from models import chain, truss, modes, power_and_grads, spectrum, W0, ETA
+from models import chain, truss, modes, power_and_grads, spectrum, W0, ETA, count_groups, cluster_participation
 
 HERE = os.path.dirname(os.path.abspath(__file__)); R = os.path.join(HERE, "results")
 PAPER = os.path.normpath(os.path.join(HERE, "..", "figures")); D = os.path.join(PAPER, "data"); os.makedirs(D, exist_ok=True)
@@ -40,6 +40,9 @@ for name, mdl, dof in (("chain", models["chain"], 8), ("truss", models["truss"],
         up = np.linalg.solve(K * (1 + 1j * ETA) - w**2 * M, f); Pp[i] = 0.5 * np.real(f @ (1j * w * up))
         tp = 0.5 * (Phi.T @ f)**2 * g_of(np.sqrt(lam), w); errp = max(errp, abs(tp.sum() - Pp[i]) / Pp[i])
     write("n_nonprop_%s.dat" % name, "w P Prmin Prmax", [ww, Pn, tmin, tmax])
+    wt = ww if name == "chain" else np.linspace(20, 700, 700)   # 700 points for the 36 truss terms keep the pgfplots figure within pdflatex's memory
+    terms = 0.5 * (Phi.T @ f)**2 * g_of(np.sqrt(lam), wt[:, None])   # modal terms P_r(w) of the proportionally damped initial design, Fig. 3(a, b)
+    write("n_terms_%s.dat" % name, "w P " + " ".join("P%d" % (r + 1) for r in range(n)), [wt, terms.sum(1)] + [terms[:, r] for r in range(n)])
     print("%s: proportional modal sum max rel err %.1e; localised dashpot: min P_r/P = %.3g, max = %.3g" % (name, errp, (tmin / Pn).min(), (tmax / Pn).max()))
 
 from run_symmetric import mirror as mirror_truss
@@ -53,8 +56,8 @@ for name in ("chain", "truss"):
         d = np.load(fn); sh = d["p"] / float(d["mu"]); near = abs(d["wr"] - W0) < 0.2 * W0
         print("  %-5s %-2s P0=%.3e P=%.3e P0/P=%6.1f mu=%.3f gap [%6.1f, %7.1f] max share within 20%% of w: %.1e  iters %d  start %s  m_load %.2f"
               % (name, vs, P0, float(d["P"]), P0 / float(d["P"]), float(d["mu"]), float(d["lo"]), float(d["hi"]), sh[near].max() if near.any() else 0, len(d["hist"]) - 1, d["start"], d["m"][mdl["load_mass"]]))
-        if vs == "k": print("     modes with zero participation (share < 1e-20): %d, of which inside the excited gap %d; mirror asymmetry max|k-k_mirror|/kmax = %.1e; distinct minima %d of %d starts" % (int(np.sum(sh < 1e-20)), int(np.sum((sh < 1e-20) & (d["wr"] > float(d["lo"])) & (d["wr"] < float(d["hi"])))), float(np.max(abs(d["k"] - (d["k"][::-1] if name == "chain" else d["k"][mirror_truss]))) / d["k"].max()), len(set(np.round(np.log10(d["all_P"]), 3))) if "all_P" in d.files else -1, len(d["all_P"]) if "all_P" in d.files else -1))
-        elif "all_P" in d.files: print("     distinct minima %d of %d starts" % (len(set(np.round(np.log10(d["all_P"]), 3))), len(d["all_P"])))
+        if vs == "k": print("     modes with zero participation (share < 1e-20): %d, of which inside the excited gap %d; mirror asymmetry max|k-k_mirror|/kmax = %.1e; groups of final power values %d of %d starts" % (int(np.sum(sh < 1e-20)), int(np.sum((sh < 1e-20) & (d["wr"] > float(d["lo"])) & (d["wr"] < float(d["hi"])))), float(np.max(abs(d["k"] - (d["k"][::-1] if name == "chain" else d["k"][mirror_truss]))) / d["k"].max()), len(set(np.round(np.log10(d["all_P"]), 3))) if "all_P" in d.files else -1, len(d["all_P"]) if "all_P" in d.files else -1))
+        elif "all_P" in d.files: print("     groups of final power values %d of %d starts" % (count_groups(d["all_P"]), len(d["all_P"])))
         write("n_modes_%s_%s.dat" % (name, vs), "wr share", [d["wr"], sh])
         if name == "chain":
             write("n_design_chain_%s.dat" % vs, "j k_init k_opt", [np.arange(mdl["n_k"]), mdl["k0"] / 1e5, d["k"] / 1e5])
@@ -65,8 +68,8 @@ for name in ("chain", "truss"):
         for L in range(6):
             fn = os.path.join(R, "%s_relax_%s_L%d.npz" % (name, vs, L))
             if not os.path.exists(fn): break
-            d = np.load(fn); ws = d["ws"]; cols.append(d["spec"]); sh = d["p"] / float(d["mu"]); act = sh > 1e-2
-            marks += [(L, w_, s_) for w_, s_ in zip(d["wr"][act], sh[act])]
+            d = np.load(fn); ws = d["ws"]; cols.append(d["spec"]); wc, pc = cluster_participation(d["wr"], d["p"]); sh = pc / float(d["mu"]); act = sh > 1e-2   # excited clusters
+            marks += [(L, w_, s_) for w_, s_ in zip(wc[act], sh[act])]
             marks.append((L, float(d["lo"]), -1)); marks.append((L, float(d["hi"]) if np.isfinite(d["hi"]) else 3000.0, -2))
             print("  %-5s relax %-2s L%d P=%.3e mu=%.3f gap [%6.1f, %7.1f] iters %d" % (name, vs, L, float(d["P"]), float(d["mu"]), float(d["lo"]), float(d["hi"]), len(d["hist"]) - 1))
         if not cols: print("  missing relax", name, vs); continue
@@ -105,7 +108,7 @@ for mode in ("k", "m", "km"):
                   [np.array(levels), np.array([a["P"] for a in seq]), np.array([a["mu"] for a in seq]), np.array([a["lo"] for a in seq]),
                    np.array([a["hi"] if np.isfinite(a["hi"]) else np.nan for a in seq]), np.array([a["shareB"] if a["shareB"] > 0 else np.nan for a in seq]), np.array([a["bound"] for a in seq]),
                    np.array([a["P"] / P0 for a in seq]), np.array([a["mu"] / mu0 for a in seq]), np.array([(a["P"] / a["mu"]) / (P0 / mu0) for a in seq])])
-            rows = [(s, w_, s_) for s, a in zip(levels, seq) for w_, s_ in zip(a["wr"], a["sh"]) if s_ > 1e-2]
+            rows = [(s, w_, s_) for s, a in zip(levels, seq) for w_, s_ in zip(*cluster_participation(a["wr"], a["sh"])) if s_ > 1e-2]   # excited clusters
             write("n_escapemodes_%s_%s_%s.dat" % (mode, name, tag), "s wr share", [np.array([r[0] for r in rows]), np.array([r[1] for r in rows]), np.array([r[2] for r in rows])])
             write("n_escape_%s_%s_%s_Pmu.dat" % (mode, name, tag), "s Pmu", [np.array(levels), np.array([a["P"] / a["mu"] for a in seq])])
         show = [v for v in (1, 10, 100, 1e3, 1e4, 1e5) if v in levels]

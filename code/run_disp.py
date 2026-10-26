@@ -4,7 +4,7 @@ displacement, its real and imaginary parts, the power, the bound 2P/(omega |F|) 
 Writes results/disp_<dof>.npz."""
 import os, numpy as np
 from scipy.optimize import minimize
-from models import chain, power_and_grads, modes, excited_gap, W0, ETA
+from models import chain, power_and_grads, modes, excited_gap, W0, ETA, count_groups
 from sqp_driver import random_start
 
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, "results"); KB = (1e4, 5e5)
@@ -35,8 +35,8 @@ for j, lab in ((5, "u6"), (8, "u9")):
     runs.sort(key=lambda z: z[2]); name, k, a = runs[0]
     a0 = disp_and_grad(mdl["k0"], j)[0]; _, _, u = disp_and_grad(k, j); P = power_and_grads(mdl, k, mdl["m0"])[0]; P0 = power_and_grads(mdl, mdl["k0"], mdl["m0"])[0]
     wr, p, mu = modes(mdl, k, mdl["m0"]); lo, hi = excited_gap(wr, p, mu)
-    print("min |%s|: start %s; |u| %.3e -> %.3e (x%.1e); Re u %.2e Im u %.2e; 2P/(w|F|) = %.3e; P %.3e -> %.3e; excited gap [%.0f, %.0f]; distinct minima %d/%d"
-          % (lab, name, a0, a, a / a0, u[j].real, u[j].imag, 2 * P / W0, P0, P, lo, hi, len(set(np.round(np.log10([z[2] for z in runs]), 3))), len(runs)), flush=True)
+    print("min |%s|: start %s; |u| %.3e -> %.3e (x%.1e); Re u %.2e Im u %.2e; 2P/(w|F|) = %.3e; P %.3e -> %.3e; excited gap [%.0f, %.0f]; groups of final power values %d/%d"
+          % (lab, name, a0, a, a / a0, u[j].real, u[j].imag, 2 * P / W0, P0, P, lo, hi, count_groups([z[2] for z in runs]), len(runs)), flush=True)
     # statistics over all local minima found
     stats = []
     for nm, kk, aa in runs:

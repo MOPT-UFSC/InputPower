@@ -2,10 +2,10 @@
 explicit designs (the numbers quoted in Section 4.4 for the modal accuracy)."""
 import numpy as np
 from scipy.linalg import eigh
-from models import chain, truss, W0, ETA
+from models import chain, truss, W0, ETA, results_file
 S = [1, 3, 10, 30, 100, 300, 1e3, 3e3, 1e4, 3e4, 1e5]
 for mode in ("k", "m", "km"):
-    a = np.load("results/escape_seq_%s.npy" % mode, allow_pickle=True).item()
+    a = np.load(results_file("escape_seq_%s.npy" % mode), allow_pickle=True).item()
     for name, mdl in (("chain", chain()), ("truss", truss())):
         for which, lab in ((0, "optimized"), (1, "explicit")):
             errs = []

@@ -4,7 +4,7 @@ Relaxation sweeps use continuation: level i starts from the optimum of level i-1
 'mass-at-load' start and keep the better of the two."""
 import os, sys
 import numpy as np
-from models import chain, truss, power_and_grads, modes, spectrum, excited_gap, check_gradients, W0
+from models import chain, truss, power_and_grads, modes, spectrum, excited_gap, check_gradients, W0, count_groups
 from sqp_driver import run_sqp, multistart, random_start
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results"); os.makedirs(OUT, exist_ok=True)
@@ -45,9 +45,10 @@ def case_single(model, tag):
         if vk and not vm:   # best design of the multi-start search over mirror-symmetric designs (run_sym_multistart.py)
             fs = os.path.join(OUT, "sym_best_%s.npz" % model["name"])
             if os.path.exists(fs): starts.append(("symmetric multi-start", np.load(fs)["k"], None))
+            else: print("   note: %s not found; run run_sym_multistart.py 200 first to include the symmetric start of Table 1" % fs, flush=True)
         k, m, P, hist, sname, allP = multistart(model, vk, vm, KB, (0.1, 5.0), starts, n_random=N_RANDOM)
-        nd = len(set(np.round(np.log10(allP), 3)))
-        print("   %s %s: %d starts, %d distinct minima, best from %s" % (tag, vs, len(allP), nd, sname), flush=True)
+        nd = count_groups(allP)
+        print("   %s %s: %d starts, %d groups of final power values, best from %s" % (tag, vs, len(allP), nd, sname), flush=True)
         save("%s_%s" % (tag, vs), model, k, m, P, hist, extra={"start": sname, "all_P": allP})
 
 

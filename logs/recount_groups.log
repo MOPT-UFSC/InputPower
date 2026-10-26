@@ -1,0 +1,17 @@
+design                       starts log10-round  0.2% rule
+Table 1 chain stiffness          52         39         37
+Table 1 chain masses             52         28         26
+Table 1 chain stiffness, masses     52         32         28
+Table 1 truss stiffness          52         46         44
+Table 1 truss masses             52         38         34
+Table 1 truss stiffness, masses     52         51         47
+pairs chain adj                  51         33         31
+pairs chain nonadj               51         43         42
+pairs truss adj                  51         49         48
+pairs truss nonadj               51         47         47
+chain min |u6| (on |u|)          31         19         18
+chain min |u9| (on |u|)          31         27         26
+symmetric search chain          200         24         20
+300 full-space starts chain     300         95         88
+symmetric search truss          200        138        129
+300 full-space starts truss     300        226        194

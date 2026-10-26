@@ -3,7 +3,7 @@ system, and constrained minimisation with SQP, multi-start (stiffness only, sum 
 antiphase pairs. Also Lemma 4 (path compliance) check for the non-adjacent pair. Results in results/pairs_<...>.npz."""
 import os, numpy as np
 from scipy.linalg import eigh
-from models import chain, truss, modes, power_and_grads, spectrum, excited_gap, W0, ETA
+from models import chain, truss, modes, power_and_grads, spectrum, excited_gap, W0, ETA, count_groups
 from sqp_driver import multistart
 
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, "results"); KB = (1e4, 5e5)
@@ -48,7 +48,7 @@ def checks(model):
 
 def minimise_pair(model, tag, fv):
     md = with_load(model, fv); k, m, P, hist, sname, allP = multistart(md, True, False, KB, (1, 1), [("initial", None, None)], n_random=50)
-    print("   %d starts, %d distinct minima, best from %s" % (len(allP), len(set(np.round(np.log10(allP), 3))), sname), flush=True)
+    print("   %d starts, %d groups of final power values, best from %s" % (len(allP), count_groups(allP), sname), flush=True)
     wr, p, mu = modes(md, k, m); lo, hi = excited_gap(wr, p, mu); P0 = power_and_grads(md, md["k0"], md["m0"])[0]
     np.savez(os.path.join(OUT, "pairs_%s_%s.npz" % (model["name"], tag)), k=k, m=m, P=P, P0=P0, hist=hist, all_P=allP, start=sname, wr=wr, p=p, mu=mu, lo=lo, hi=hi, f=fv,
              spec=spectrum(md, k, m, np.geomspace(5, 3000, 2500)), ws=np.geomspace(5, 3000, 2500))

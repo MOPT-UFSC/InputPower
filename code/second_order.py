@@ -6,7 +6,7 @@ A design is a strict local minimum if the projected Hessian is positive definite
 the box on every active bound. Usage: python second_order.py"""
 import numpy as np
 from scipy.linalg import null_space
-from models import chain, truss, power_and_grads
+from models import chain, truss, power_and_grads, results_file
 KB, MB = (1e4, 5e5), (0.1, 5.0)
 def analyse(mdl, k, m, vk, vm, label):
     x = np.r_[np.log(k) if vk else [], np.log(m) if vm else []]; nk = len(k) if vk else 0
@@ -39,4 +39,4 @@ def analyse(mdl, k, m, vk, vm, label):
         label, P, free.sum(), n, res_free, "ok" if sign_ok else "VIOLATED", strict, Z.shape[1], ev.min(), ev.max(), "second-order sufficient conditions hold numerically" if ev.min() > 0 and sign_ok and strict > 10 * res_free else "not verified"))
 for name, mdl in (("chain", chain()), ("truss", truss())):
     for c, vk, vm in (("k", True, False), ("m", False, True), ("km", True, True)):
-        d = np.load("results/%s_%s.npz" % (name, c)); analyse(mdl, d["k"], d["m"], vk, vm, "Table 1 %s %s" % (name, c))
+        d = np.load(results_file("%s_%s.npz" % (name, c))); analyse(mdl, d["k"], d["m"], vk, vm, "Table 1 %s %s" % (name, c))

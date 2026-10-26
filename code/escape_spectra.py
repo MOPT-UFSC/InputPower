@@ -2,12 +2,12 @@
 optimised / explicit family, one curve per level s. Dots at the bottom: excited modes (share > 1 %), one row per level."""
 import os, sys, numpy as np
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
-from models import chain, truss, spectrum, W0
+from models import chain, truss, spectrum, W0, results_file
 S_LEVELS = [1, 3, 10, 30, 100, 300, 1e3, 3e3, 1e4, 3e4, 1e5]   # as in escape_seq.py
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODE = sys.argv[1] if len(sys.argv) > 1 else "k"
-R = np.load(os.path.join(HERE, "results", "escape_seq_%s.npy" % MODE), allow_pickle=True).item()
+R = np.load(results_file("escape_seq_%s.npy" % MODE), allow_pickle=True).item()
 BOX = {"k": "$k\\in[\\bar k/s, \\bar k s]$, masses fixed", "m": "$m\\in[\\bar m/s, \\bar m s]$, stiffness fixed", "km": "$k\\in[\\bar k/s, \\bar k s]$, $m\\in[\\bar m/s, \\bar m s]$"}[MODE]
 SHOW = [1, 10, 100, 1e3, 1e4, 1e5] if MODE != "km" else [1, 3, 10, 100, 1e3, 1e4]
 WS = np.geomspace(0.1, 1e6, 4000)

@@ -1,18 +1,18 @@
 \begin{tikzpicture}
 \begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.6cm, vertical sep=1.5cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\textwidth, height=0.34\textwidth, xmin=20, xmax=700, xlabel={$\omega$ [rad/s]}, title style={font=\footnotesize}, legend style={font=\tiny, draw=none, fill=none}]
 \nextgroupplot[title={(a) chain, hysteretic damping}, ymode=log, ymin=1e-12, ymax=1e0, ylabel={$P$, $P_r$ [W]}, legend pos=north west, legend columns=3]
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P1] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P2] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P3] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P4] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P5] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P6] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P7] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P8] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P9] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P10] {\datapath ex1_power.dat};
-  \addplot[gray!60, thin, forget plot] table[x=w, y=P11] {\datapath ex1_power.dat};
-  \addplot[black, thick] table[x=w, y=P] {\datapath ex1_power.dat}; \addlegendentry{$P$}
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P1] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P2] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P3] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P4] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P5] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P6] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P7] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P8] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P9] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P10] {\datapath n_terms_chain.dat};
+  \addplot[gray!60, thin, forget plot] table[x=w, y=P11] {\datapath n_terms_chain.dat};
+  \addplot[black, thick] table[x=w, y=P] {\datapath n_terms_chain.dat}; \addlegendentry{$P$}
   \addplot[red!70!black, dashed, thick] coordinates {(300,1e-12) (300,1e-1)}; \addlegendentry{$\omega$}
   \addplot[gray!60, thin] coordinates {(0,1e-20) (0,1e-20)}; \addlegendentry{$P_r$}
 \nextgroupplot[title={(b) truss, hysteretic damping}, ymode=log, ymin=1e-12, ymax=1e0, legend pos=north west, legend columns=3]

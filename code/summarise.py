@@ -2,9 +2,10 @@
 in the history (0 for the line-search driver), final design change. Usage: python summarise.py [prefix]"""
 import glob, os, sys
 import numpy as np
+from models import results_dir
 
 prefix = sys.argv[1] if len(sys.argv) > 1 else ""
-files = sorted(glob.glob(os.path.join(os.path.dirname(__file__), "results", prefix + "*.npz")))
+files = sorted(glob.glob(os.path.join(results_dir(), prefix + "*.npz")))
 print("%-26s %11s %8s %7s %18s %6s %5s %9s" % ("case", "P_final", "P0/P", "mu", "gap [rad/s]", "iters", "incr", "last chg"))
 for fn in files:
     d = np.load(fn); h = d["hist"]; Ph = h[:, 1]

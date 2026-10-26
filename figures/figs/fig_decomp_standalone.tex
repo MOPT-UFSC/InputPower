@@ -1,0 +1,30 @@
+\documentclass[12pt]{standalone}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc,decorations.pathmorphing,patterns,arrows.meta}
+\usepgfplotslibrary{groupplots}
+\emergencystretch=1em
+
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\iu}{\mathrm{i}}
+\newcommand{\datapath}{../data/}
+\newcommand{\appref}[1]{\ref{#1}}
+
+\pgfplotsset{
+  every axis/.append style={
+    width=0.48\textwidth, height=0.36\textwidth,
+    tick label style={font=\footnotesize}, label style={font=\footnotesize},
+    legend style={font=\scriptsize, draw=none, fill=none},
+    grid=major, grid style={gray!25},
+  },
+}
+
+\begin{document}
+\input{../fig_decomp.tex}
+\end{document}

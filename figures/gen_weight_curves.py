@@ -1,4 +1,5 @@
-"""Data for Fig. 2 (modal weight curves, g_curves.dat) and Fig. 3(a) (modal terms of the initial chain, ex1_power.dat).
+"""Data for Fig. 1: the modal weight curves g(omega_r; omega) of the three damping models, written to data/g_curves.dat.
+(The modal terms of Fig. 3 are written by code/export_paper.py.)
 Procedural style. Writes .dat files readable by pgfplots into ./data/.
 """
 import os
@@ -61,35 +62,6 @@ def write(name, header, cols):
     arr = np.column_stack(cols)
     np.savetxt(os.path.join(OUT, name), arr, header=header, comments="")
 
-
-# ---------------------------------------------------------------- Example 1
-rng = np.random.default_rng(1)
-k0 = 1e5 * (1 + 0.2 * rng.random(N + 1))
-K0 = build_K(k0)
-lam0, Phi0 = eigh(K0, M)
-wn0 = np.sqrt(lam0)
-phi2_0 = Phi0[IC]**2
-np.savetxt(os.path.join(OUT, "ex1_springs.dat"), np.column_stack([np.arange(N + 1), k0 / 1e5]),
-           header="j k_j_over_1e5", comments="")
-write("ex1_modes.dat", "r wr phi2", [np.arange(1, N + 1), wn0, phi2_0])
-
-ww = np.linspace(20, 700, 1400)
-P_tot = np.zeros_like(ww); Pr = np.zeros((len(ww), N))
-Pr_np_min = np.zeros_like(ww); Pr_np_max = np.zeros_like(ww); P_np = np.zeros_like(ww)
-Cnp = np.zeros((N, N)); Cnp[8, 8] = 80.0
-for i, w in enumerate(ww):
-    P_tot[i], _ = input_power(w, K0, "hyst")
-    Pr[i] = modal_terms(w, K0, Phi0, "hyst")
-    Z = K0 - w**2 * M + 1j * w * Cnp
-    u = np.linalg.solve(Z, F)
-    P_np[i] = 0.5 * np.real(np.conj(F) @ (1j * w * u))
-    t = 0.5 * np.real(1j * w * np.conj(Phi0.T @ F) * (Phi0.T @ M @ u))
-    Pr_np_min[i] = t.min(); Pr_np_max[i] = t.max()
-err_sum = np.max(np.abs(P_tot - Pr.sum(1)) / P_tot)
-write("ex1_power.dat", "w P " + " ".join(f"P{r+1}" for r in range(N)), [ww, P_tot] + [Pr[:, r] for r in range(N)])
-write("ex1_nonprop.dat", "w P Prmin Prmax", [ww, P_np, Pr_np_min, Pr_np_max])
-print("ex1: max rel err of modal sum (hyst) =", err_sum, " min P_r/P =", np.min(Pr / P_tot[:, None]),
-      " min P_r/P nonprop =", np.min(Pr_np_min / P_np))
 
 # ---------------------------------------------------------------- g_r curves
 def g_of(wr, model):

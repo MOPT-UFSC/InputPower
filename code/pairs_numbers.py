@@ -1,10 +1,10 @@
 """Numbers quoted in Section 4.3 for the pair designs (results/pairs_*.npz): powers, bars at the bounds, main modes,
 static compliance, compliance bound of the lowest excited mode, largest ratio participation/bound, low-frequency bound."""
 import numpy as np
-from models import chain, truss, modes, excited_gap
+from models import chain, truss, modes, excited_gap, results_file
 for name, mdl in (("chain", chain()), ("truss", truss())):
     for tag in ("adj", "nonadj"):
-        d = np.load("results/pairs_%s_%s.npz" % (name, tag)); k, m, f = d["k"], d["m"], d["f"]; K = mdl["assemble_K"](k)
+        d = np.load(results_file("pairs_%s_%s.npz" % (name, tag))); k, m, f = d["k"], d["m"], d["f"]; K = mdl["assemble_K"](k)
         md = dict(mdl); md["f"] = f; wr, p, mu = modes(md, k, m); sh = p / mu; C = f @ np.linalg.solve(K, f)
         lo, hi = excited_gap(wr, p, mu); top = np.argsort(-p)[:4]
         print("%s %s: P0=%.3e P=%.3e (x%.1f) mu=%.2f gap [%.0f, %.0f]; k at kmin %d, kmax %d; top modes: %s" % (name, tag, float(d["P0"]), float(d["P"]), float(d["P0"]) / float(d["P"]), mu, lo, hi, int(np.sum(k < 1.001e4)), int(np.sum(k > 0.999 * 5e5)), "; ".join("%.0f rad/s (%.2f)" % (wr[i], sh[i]) for i in top)))

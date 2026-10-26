@@ -1,5 +1,5 @@
 """Sequential quadratic programming (SciPy SLSQP) for min P(w0) over stiffnesses and/or masses.
-Same interface and return values as mma_driver.run_mma, so the case scripts can switch between the two.
+Returns k, m, P, hist, info (see below).
 
 Variables: the logarithms of the design variables (all of them; nothing is eliminated).
 Objective: log P, with the analytic adjoint gradient (d log P / d log x = x dP/dx / P).

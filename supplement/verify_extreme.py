@@ -5,7 +5,7 @@ lowest eigenvalue recomputed in 40-digit arithmetic (mpmath). Also the shares of
 rows of the table of Section 5.4 (verify_extreme_table.tex)."""
 import numpy as np, mpmath as mp, time
 from scipy.linalg import eigh
-from models import chain, truss, W0, ETA
+from models import chain, truss, W0, ETA, results_file
 mp.mp.dps = 40
 S = [1, 3, 10, 30, 100, 300, 1e3, 3e3, 1e4, 3e4, 1e5]
 cases = [("k", "chain", 0, 10), ("k", "truss", 0, 10), ("k", "truss", 1, 10), ("m", "chain", 0, 10), ("m", "truss", 0, 10),
@@ -19,7 +19,7 @@ def mp_modes(K, M, f):
     lam = np.array([float(E[i]) for i in range(n)]); p = np.array([float(sum(Q[i, r] * dm[i] * fm[i] for i in range(n))**2) for r in range(n)])
     return lam, p, E, fm
 for mode, name, which, j in cases:
-    mdl = chain() if name == "chain" else truss(); a = np.load("results/escape_seq_%s.npy" % mode, allow_pickle=True).item()[name][which][j]
+    mdl = chain() if name == "chain" else truss(); a = np.load(results_file("escape_seq_%s.npy" % mode), allow_pickle=True).item()[name][which][j]
     k, m = a["k"], a["m"]; K = mdl["assemble_K"](k); M = mdl["assemble_M"](m); f = mdl["f"]; n = len(f)
     lam, Phi = eigh(K, M); p = (Phi.T @ f)**2
     res = np.max(np.linalg.norm(K @ Phi - M @ Phi * lam, axis=0) / np.linalg.norm(K @ Phi, axis=0)); orth = np.max(abs(Phi.T @ M @ Phi - np.eye(n)))
@@ -39,12 +39,12 @@ for mode, name, which, j in cases:
 # near-orthogonal modes of the truss stiffness sequence between 300 and 330 rad/s
 print("\nTruss, stiffness only: shares of the modes between 300 and 330 rad/s, double vs 40 digits")
 for j in (4, 8, 10):
-    mdl = truss(); a = np.load("results/escape_seq_k.npy", allow_pickle=True).item()["truss"][0][j]
+    mdl = truss(); a = np.load(results_file("escape_seq_k.npy"), allow_pickle=True).item()["truss"][0][j]
     K = mdl["assemble_K"](a["k"]); M = mdl["assemble_M"](a["m"]); f = mdl["f"]; lam, Phi = eigh(K, M); p = (Phi.T @ f)**2; mu = p.sum()
     lam_mp, p_mp, _, _ = mp_modes(K, M, f); mu_mp = p_mp.sum()
     for r in np.where((np.sqrt(lam) > 300) & (np.sqrt(lam) < 330))[0]:
         rm = np.argmin(abs(lam_mp - lam[r])); print("  s=%-6g wr=%.2f rad/s: share double %.1e, 40 digits %.1e" % (S[j], np.sqrt(lam[r]), p[r] / mu, p_mp[rm] / mu_mp))
-d = np.load("results/truss_k.npz"); mdl = truss(); K = mdl["assemble_K"](d["k"]); M = mdl["assemble_M"](d["m"]); f = mdl["f"]; lam, Phi = eigh(K, M); p = (Phi.T @ f)**2; mu = p.sum()
+d = np.load(results_file("truss_k.npz")); mdl = truss(); K = mdl["assemble_K"](d["k"]); M = mdl["assemble_M"](d["m"]); f = mdl["f"]; lam, Phi = eigh(K, M); p = (Phi.T @ f)**2; mu = p.sum()
 lam_mp, p_mp, _, _ = mp_modes(K, M, f); mu_mp = p_mp.sum()
 for r in np.where((np.sqrt(lam) > 270) & (np.sqrt(lam) < 330))[0]:
     rm = np.argmin(abs(lam_mp - lam[r])); print("  Table 1 truss bars only: wr=%.2f rad/s: share double %.1e, 40 digits %.1e" % (np.sqrt(lam[r]), p[r] / mu, p_mp[rm] / mu_mp))

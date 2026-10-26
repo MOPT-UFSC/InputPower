@@ -4,7 +4,7 @@ plus the central vertical). Random log-uniform starts scaled to the budget. Save
 results/sym_best_<system>.npz and prints all local minima found. Usage: python run_sym_multistart.py [n_starts]"""
 import sys, os, numpy as np
 from scipy.optimize import minimize
-from models import chain, truss, power_and_grads, modes, excited_gap, W0
+from models import chain, truss, power_and_grads, modes, excited_gap, W0, count_groups
 from run_symmetric import red as truss_red, to_full as truss_full, groups as truss_groups, w as truss_w, t as truss_model
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, "results")
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 100
@@ -34,5 +34,5 @@ for name, full, red, to_full, w in cases:
     distinct = []
     for Pq, kq in found:
         if not any(abs(Pq - Pd) / Pd < 1e-3 for Pd, _ in distinct): distinct.append((Pq, kq))
-    print("%s: %d successful starts, %d distinct minima; best P=%.4e W, gap %s; the ten lowest: %s" % (name, len(found), len(distinct), P, np.round(excited_gap(wr, p, mu), 1), ["%.3e" % q for q, _ in distinct[:10]]), flush=True)
+    print("%s: %d successful starts, %d groups of final power values (0.2%% rule); best P=%.4e W, gap %s; the ten lowest: %s" % (name, len(found), count_groups([q for q, _ in found]), P, np.round(excited_gap(wr, p, mu), 1), ["%.3e" % q for q, _ in distinct[:10]]), flush=True)
     np.savez(os.path.join(OUT, "sym_best_%s.npz" % name), k=k, m=m0, P=P, all_P=np.array([q for q, _ in found]), wr=wr, p=p, mu=mu)

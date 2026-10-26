@@ -1,8 +1,8 @@
 """First-order residuals of every design saved in results/ (Table 1, relaxation levels, pairs, displacement objectives):
 reduced gradient of log P (or log |u_j|) with the budget multipliers fitted on the variables farther than 0.1% from a bound,
 relative to the gradient scale."""
-import glob, numpy as np
-from models import chain, truss, power_and_grads
+import glob, os, numpy as np
+from models import chain, truss, power_and_grads, results_dir
 KB, MB = (1e4, 5e5), (0.1, 5.0)
 K_LEVELS = [1e5, 3e4, 1e4, 3e3, 1e3, 3e2]
 M_LEVELS = {"chain": [(0.9, 1.1), (0.5, 2.0), (0.25, 4.0), (0.125, 8.0), (0.1, 10.0), (0.1, 10.9)], "truss": [(0.9, 1.1), (0.5, 2.0), (0.25, 4.0), (0.125, 8.0), (0.1, 10.0), (0.1, 19.9)]}
@@ -14,7 +14,7 @@ def resid(g_parts):
             a = x[free]; lam = (g[free] @ a) / (a @ a); worst = max(worst, np.max(abs(g[free] - lam * a)) / gs)
     return worst
 worst_all = 0.0
-for fn in sorted(glob.glob("results/*.npz")):
+for fn in sorted(glob.glob(os.path.join(results_dir(), "*.npz"))):
     base = fn.split("/")[-1][:-4]
     if base.startswith("disp_") or base.startswith("sym_best") or "theta" in base: continue
     name = "chain" if "chain" in base else "truss"; mdl = chain() if name == "chain" else truss(); d = np.load(fn)

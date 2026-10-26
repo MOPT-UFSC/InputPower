@@ -144,8 +144,8 @@ def fig_designs_chain():
 def fig_decomp():
     s = "\\begin{tikzpicture}\n\\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.6cm, vertical sep=1.5cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\\textwidth, height=0.34\\textwidth, xmin=20, xmax=700, xlabel={$\\omega$ [rad/s]}, title style={font=\\footnotesize}, legend style={font=\\tiny, draw=none, fill=none}]\n"
     s += "\\nextgroupplot[title={(a) chain, hysteretic damping}, ymode=log, ymin=1e-12, ymax=1e0, ylabel={$P$, $P_r$ [W]}, legend pos=north west, legend columns=3]\n"
-    for r in range(1, 12): s += "  \\addplot[gray!60, thin, forget plot] table[x=w, y=P%d] {\\datapath ex1_power.dat};\n" % r
-    s += "  \\addplot[black, thick] table[x=w, y=P] {\\datapath ex1_power.dat}; \\addlegendentry{$P$}\n"
+    for r in range(1, 12): s += "  \\addplot[gray!60, thin, forget plot] table[x=w, y=P%d] {\\datapath n_terms_chain.dat};\n" % r
+    s += "  \\addplot[black, thick] table[x=w, y=P] {\\datapath n_terms_chain.dat}; \\addlegendentry{$P$}\n"
     s += "  \\addplot[red!70!black, dashed, thick] coordinates {(300,1e-12) (300,1e-1)}; \\addlegendentry{$\\omega$}\n"
     s += "  \\addplot[gray!60, thin] coordinates {(0,1e-20) (0,1e-20)}; \\addlegendentry{$P_r$}\n"
     s += "\\nextgroupplot[title={(b) truss, hysteretic damping}, ymode=log, ymin=1e-12, ymax=1e0, legend pos=north west, legend columns=3]\n"
