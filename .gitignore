@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.aux
+*.log
+!logs/*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
