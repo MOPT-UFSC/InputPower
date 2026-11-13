@@ -143,3 +143,17 @@ def check_gradients(model, k, m, h_k=1.0, h_m=1e-4):
     fk = np.array([(power_and_grads(model, k + h_k * np.eye(len(k))[j], m)[0] - power_and_grads(model, k - h_k * np.eye(len(k))[j], m)[0]) / (2 * h_k) for j in range(len(k))])
     fm = np.array([(power_and_grads(model, k, m + h_m * np.eye(len(m))[i])[0] - power_and_grads(model, k, m - h_m * np.eye(len(m))[i])[0]) / (2 * h_m) for i in range(len(m))])
     return np.max(abs(gk - fk)) / np.max(abs(fk)), np.max(abs(gm - fm)) / np.max(abs(fm))
+
+
+def mirror_maps(model):
+    """Index maps of the mirror about the vertical axis through the loaded point: (mk, mm) with k[mk] and m[mm] the
+    mirrored stiffness and mass vectors. Chain: reversal. Truss: reflection of the node columns."""
+    if model["name"] == "chain": return np.arange(model["n_k"])[::-1].copy(), np.arange(model["n_m"])[::-1].copy()
+    nx = model["n_m"] // 2; mn = lambda q: (q // nx) * nx + (nx - 1 - q % nx)
+    bars = [tuple(int(v) for v in b) for b in model["bars"]]; key = {tuple(sorted(b)): i for i, b in enumerate(bars)}
+    return np.array([key[tuple(sorted((mn(i), mn(j))))] for i, j in bars]), np.array([mn(q) for q in range(model["n_m"])])
+
+
+def asymmetry(x, mx):
+    """Largest difference between mirrored entries, relative to the largest entry."""
+    return float(np.max(np.abs(x - x[mx])) / np.max(x))

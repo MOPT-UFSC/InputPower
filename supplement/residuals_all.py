@@ -16,7 +16,7 @@ def resid(g_parts):
 worst_all = 0.0
 for fn in sorted(glob.glob(os.path.join(results_dir(), "*.npz"))):
     base = fn.split("/")[-1][:-4]
-    if base.startswith("disp_") or base.startswith("sym_best") or "theta" in base: continue
+    if base.startswith("disp_") or base.startswith("sym") or "theta" in base: continue
     name = "chain" if "chain" in base else "truss"; mdl = chain() if name == "chain" else truss(); d = np.load(fn)
     if "k" not in d.files or "m" not in d.files or "truncated" in base: continue
     if "pairs" in base: mdl = dict(mdl); mdl["f"] = d["f"]; vk, vm, kb, mb = True, False, KB, MB
