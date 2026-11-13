@@ -3,7 +3,7 @@ mma/export_paper.py). Pure templating, no computation."""
 import os, numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__)); D = os.path.join(HERE, "data")
-LV = ["yellow!75!black", "green!60!black", "teal!80!black", "cyan!70!black", "blue!70!black", "violet!80!black"]
+LV = ["yellow!50!black", "green!60!black", "teal!80!black", "cyan!70!black", "blue!70!black", "violet!80!black"]
 K_LAB = ["$k_{\\min}=10^5$", "$3\\times10^4$", "$10^4$", "$3\\times10^3$", "$10^3$", "$3\\times10^2$"]
 M_LAB = {"chain": ["$[0.9,1.1]$", "$[0.5,2]$", "$[0.25,4]$", "$[0.125,8]$", "$[0.1,10]$", "$[0.1,10]$"],
          "truss": ["$[0.9,1.1]$", "$[0.5,2]$", "$[0.25,4]$", "$[0.125,8]$", "$[0.1,10]$", "$[0.1,19.9]$"]}
@@ -114,13 +114,15 @@ def fig_escape_spec():
 
 def fig_pairs():
     s = "\\begin{tikzpicture}\n\\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.6cm, vertical sep=1.5cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\\textwidth, height=0.34\\textwidth,\n"
-    s += "  ymode=log, xmin=0, xmax=1500, ymin=1e-6, ymax=1.5, xlabel={$\\omega_r$ [rad/s]}, ylabel={$p_r/\\mu_{\\bm f}$}, title style={font=\\footnotesize}, legend style={font=\\tiny, at={(0.98,0.98)}, anchor=north east}]\n"
+    s += "  ymode=log, xmin=0, xmax=1500, ymin=1e-6, ymax=1.5, xlabel={$\\omega_r$ [rad/s]}, ylabel={$p_r/\\mu_{\\bm f}$}, title style={font=\\footnotesize}, legend style={font=\\scriptsize, draw=none, fill=none}]\n"
     for lab, name, tag in [("(a) chain, adjacent pair $\\bm e_6-\\bm e_7$", "chain", "adj"), ("(b) truss, adjacent pair, nodes 16 and 17", "truss", "adj"),
                            ("(c) chain, pair $\\bm e_4-\\bm e_8$", "chain", "nonadj"), ("(d) truss, pair, nodes 14 and 18", "truss", "nonadj")]:
-        s += "\\nextgroupplot[title={%s}]\n" % lab
-        s += "  \\addplot[ycomb, blue!60!black, thick, mark=*, mark size=1.3pt] table[x=wr, y=share] {\\datapath n_pairs_%s_%s_modes.dat}; \\addlegendentry{final}\n" % (name, tag)
-        s += "  \\addplot[red!70!black, dashed] coordinates {(300,1e-6) (300,1.5)}; \\addlegendentry{$\\omega$}\n"
-    s += "\\end{groupplot}\n\\end{tikzpicture}\n"
+        first = tag == "adj" and name == "chain"   # one shared legend below the panels
+        le = (lambda q: " \\addlegendentry{%s}" % q) if first else (lambda q: "")
+        s += "\\nextgroupplot[title={%s}%s]\n" % (lab, ", legend to name=legpairs, legend columns=-1" if first else "")
+        s += "  \\addplot[ycomb, blue!60!black, thick, mark=*, mark size=1.3pt] table[x=wr, y=share] {\\datapath n_pairs_%s_%s_modes.dat};%s\n" % (name, tag, le("final design"))
+        s += "  \\addplot[red!70!black, dashed] coordinates {(300,1e-6) (300,1.5)};%s\n" % le("$\\omega$")
+    s += "\\end{groupplot}\n\\node[anchor=north] at ($(group c1r2.south west)!0.5!(group c2r2.south east)$) [yshift=-1.0cm] {\\pgfplotslegendfromname{legpairs}};\n\\end{tikzpicture}\n"
     open(os.path.join(HERE, "fig_pairs.tex"), "w").write(s)
 
 
@@ -143,17 +145,17 @@ def fig_designs_chain():
 
 def fig_decomp():
     s = "\\begin{tikzpicture}\n\\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.6cm, vertical sep=1.5cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\\textwidth, height=0.34\\textwidth, xmin=20, xmax=700, xlabel={$\\omega$ [rad/s]}, title style={font=\\footnotesize}, legend style={font=\\tiny, draw=none, fill=none}]\n"
-    s += "\\nextgroupplot[title={(a) chain, hysteretic damping}, ymode=log, ymin=1e-12, ymax=1e0, ylabel={$P$, $P_r$ [W]}, legend pos=north west, legend columns=3]\n"
+    s += "\\nextgroupplot[title={(a) chain, hysteretic damping}, ymode=log, ymin=1e-12, ymax=1e3, ylabel={$P$, $P_r$ [W]}, legend pos=north west, legend columns=3]\n"
     for r in range(1, 12): s += "  \\addplot[gray!60, thin, forget plot] table[x=w, y=P%d] {\\datapath n_terms_chain.dat};\n" % r
     s += "  \\addplot[black, thick] table[x=w, y=P] {\\datapath n_terms_chain.dat}; \\addlegendentry{$P$}\n"
     s += "  \\addplot[red!70!black, dashed, thick] coordinates {(300,1e-12) (300,1e-1)}; \\addlegendentry{$\\omega$}\n"
     s += "  \\addplot[gray!60, thin] coordinates {(0,1e-20) (0,1e-20)}; \\addlegendentry{$P_r$}\n"
-    s += "\\nextgroupplot[title={(b) truss, hysteretic damping}, ymode=log, ymin=1e-12, ymax=1e0, legend pos=north west, legend columns=3]\n"
+    s += "\\nextgroupplot[title={(b) truss, hysteretic damping}, ymode=log, ymin=1e-12, ymax=1e3, legend pos=north west, legend columns=3]\n"
     for r in range(1, 37): s += "  \\addplot[gray!60, thin, forget plot] table[x=w, y=P%d] {\\datapath n_terms_truss.dat};\n" % r
     s += "  \\addplot[black, thick] table[x=w, y=P] {\\datapath n_terms_truss.dat}; \\addlegendentry{$P$}\n"
     s += "  \\addplot[red!70!black, dashed, thick] coordinates {(300,1e-12) (300,1e-1)}; \\addlegendentry{$\\omega$}\n"
     s += "  \\addplot[gray!60, thin] coordinates {(0,1e-20) (0,1e-20)}; \\addlegendentry{$P_r$}\n"
-    s += "\\nextgroupplot[title={(c) chain, dashpot on $m_9$}, ymin=-400, ymax=400, ylabel={$P_r/P$}, legend pos=south east]\n"
+    s += "\\nextgroupplot[title={(c) chain, dashpot on $m_9$}, ymin=-400, ymax=400, ylabel={$P_r/P$}, legend pos=north west]\n"
     s += "  \\addplot[blue!70!black, thick] table[x=w, y expr=\\thisrow{Prmin}/\\thisrow{P}] {\\datapath n_nonprop_chain.dat}; \\addlegendentry{$\\min_r P_r/P$}\n"
     s += "  \\addplot[orange!80!black, thick] table[x=w, y expr=\\thisrow{Prmax}/\\thisrow{P}] {\\datapath n_nonprop_chain.dat}; \\addlegendentry{$\\max_r P_r/P$}\n"
     s += "  \\addplot[black, dashed, forget plot] coordinates {(20,0) (700,0)};\n"

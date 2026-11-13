@@ -3,7 +3,7 @@
   xmode=log, ymode=log, xmin=0.1, xmax=1e6, xlabel={$\omega$ [rad/s]}, ylabel={$P(\omega)$ [W]}, title style={font=\footnotesize},
   legend style={font=\scriptsize, draw=none, fill=none}]
 \nextgroupplot[title={(a) chain, stiffness only}, ymin=1e-13, ymax=1e2, legend to name=legspec, legend columns=-1]
-  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_escapespec_k_chain_s0.dat}; \addlegendentry{$s=10^{0}$}
+  \addplot[yellow!50!black] table[x=w, y=P] {\datapath n_escapespec_k_chain_s0.dat}; \addlegendentry{$s=10^{0}$}
   \addplot[green!60!black] table[x=w, y=P] {\datapath n_escapespec_k_chain_s1.dat}; \addlegendentry{$s=10^{1}$}
   \addplot[teal!80!black] table[x=w, y=P] {\datapath n_escapespec_k_chain_s2.dat}; \addlegendentry{$s=10^{2}$}
   \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_escapespec_k_chain_s3.dat}; \addlegendentry{$s=10^{3}$}
@@ -11,7 +11,7 @@
   \addplot[violet!80!black] table[x=w, y=P] {\datapath n_escapespec_k_chain_s5.dat}; \addlegendentry{$s=10^{5}$}
   \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-13) (300,1e2)};
 \nextgroupplot[title={(b) truss, stiffness only}, ymin=1e-13, ymax=1e2]
-  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_escapespec_k_truss_s0.dat};
+  \addplot[yellow!50!black] table[x=w, y=P] {\datapath n_escapespec_k_truss_s0.dat};
   \addplot[green!60!black] table[x=w, y=P] {\datapath n_escapespec_k_truss_s1.dat};
   \addplot[teal!80!black] table[x=w, y=P] {\datapath n_escapespec_k_truss_s2.dat};
   \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_escapespec_k_truss_s3.dat};
@@ -19,7 +19,7 @@
   \addplot[violet!80!black] table[x=w, y=P] {\datapath n_escapespec_k_truss_s5.dat};
   \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-13) (300,1e2)};
 \nextgroupplot[title={(c) chain, masses only}, ymin=1e-21, ymax=1e2]
-  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_escapespec_m_chain_s0.dat};
+  \addplot[yellow!50!black] table[x=w, y=P] {\datapath n_escapespec_m_chain_s0.dat};
   \addplot[green!60!black] table[x=w, y=P] {\datapath n_escapespec_m_chain_s1.dat};
   \addplot[teal!80!black] table[x=w, y=P] {\datapath n_escapespec_m_chain_s2.dat};
   \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_escapespec_m_chain_s3.dat};
@@ -27,7 +27,7 @@
   \addplot[violet!80!black] table[x=w, y=P] {\datapath n_escapespec_m_chain_s5.dat};
   \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-21) (300,1e2)};
 \nextgroupplot[title={(d) truss, masses only}, ymin=1e-21, ymax=1e2]
-  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_escapespec_m_truss_s0.dat};
+  \addplot[yellow!50!black] table[x=w, y=P] {\datapath n_escapespec_m_truss_s0.dat};
   \addplot[green!60!black] table[x=w, y=P] {\datapath n_escapespec_m_truss_s1.dat};
   \addplot[teal!80!black] table[x=w, y=P] {\datapath n_escapespec_m_truss_s2.dat};
   \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_escapespec_m_truss_s3.dat};
@@ -35,13 +35,13 @@
   \addplot[violet!80!black] table[x=w, y=P] {\datapath n_escapespec_m_truss_s5.dat};
   \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-21) (300,1e2)};
 \nextgroupplot[title={(e) chain, stiffness and masses}, ymin=1e-21, ymax=1e2]
-  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_escapespec_km_chain_s0.dat};
+  \addplot[yellow!50!black] table[x=w, y=P] {\datapath n_escapespec_km_chain_s0.dat};
   \addplot[green!60!black] table[x=w, y=P] {\datapath n_escapespec_km_chain_s1.dat};
   \addplot[teal!80!black] table[x=w, y=P] {\datapath n_escapespec_km_chain_s2.dat};
   \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_escapespec_km_chain_s3.dat};
   \addplot[red!70!black, dashed, forget plot] coordinates {(300,1e-21) (300,1e2)};
 \nextgroupplot[title={(f) truss, stiffness and masses}, ymin=1e-21, ymax=1e2]
-  \addplot[yellow!75!black] table[x=w, y=P] {\datapath n_escapespec_km_truss_s0.dat};
+  \addplot[yellow!50!black] table[x=w, y=P] {\datapath n_escapespec_km_truss_s0.dat};
   \addplot[green!60!black] table[x=w, y=P] {\datapath n_escapespec_km_truss_s1.dat};
   \addplot[teal!80!black] table[x=w, y=P] {\datapath n_escapespec_km_truss_s2.dat};
   \addplot[cyan!70!black] table[x=w, y=P] {\datapath n_escapespec_km_truss_s3.dat};
