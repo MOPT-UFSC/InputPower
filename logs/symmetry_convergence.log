@@ -1,0 +1,4 @@
+chain_km             campaign (200 starts) 2.2051e-07 | best after 50/100/200/500/1000 starts: 2.2051e-07 2.2051e-07 2.2051e-07 2.2051e-07 2.2051e-07 | best 2.2051e-07 at start 747 (asym k 5.2e-11) | runs within 0.2% of best: 250
+pairs_chain_nonadj   campaign (200 starts) 7.4995e-06 | best after 50/100/200/500/1000 starts: 7.4995e-06 7.4995e-06 7.4995e-06 7.4995e-06 7.4995e-06 | best 7.4995e-06 at start 301 (asym k 2.5e-11) | runs within 0.2% of best: 5
+truss_km             campaign (200 starts) 8.4576e-08 | best after 50/100/200/500/1000 starts: 8.4820e-08 8.4820e-08 8.4820e-08 8.4576e-08 8.4576e-08 | best 8.4576e-08 at start 265 (asym k 5.9e-07) | runs within 0.2% of best: 3
+pairs_truss_nonadj   campaign (200 starts) 6.8078e-06 | best after 50/100/200/500/1000 starts: 7.0777e-06 7.0777e-06 6.9059e-06 6.9059e-06 6.6189e-06 | best 6.6189e-06 at start 650 (asym k 5.6e-06) | runs within 0.2% of best: 1

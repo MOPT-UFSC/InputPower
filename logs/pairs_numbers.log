@@ -1,0 +1,14 @@
+chain adj: P0=1.318e-04 P=6.861e-06 (x19.2) mu=2.00 gap [nan, 1035]; k at kmin 5, kmax 1; top modes: 1035 rad/s (0.99); 753 rad/s (0.01); 191 rad/s (0.00); 149 rad/s (0.00)
+   above 800 rad/s: 1 modes carry 0.99 of mu; compliance f^H K^-1 f/|F|^2 = 1.993e-06 m/N; max p_r/(C w_r^2) = 0.93
+   lowest excited mode 1035.3 rad/s: p = 1.978, compliance bound C w^2 = 2.136; participation below 60 rad/s 0.000, bound 60^2 C = 0.007; below 100: 0.000 vs 0.020
+   chain path springs [6]: sum 1/k = 2.000e-06, path bound of lowest excited mode 2.144, max p/(path bound) over modes 0.92
+chain nonadj: P0=4.348e-04 P=7.500e-06 (x58.0) mu=2.00 gap [175, 969]; k at kmin 8, kmax 0; top modes: 969 rad/s (0.66); 59 rad/s (0.24); 111 rad/s (0.09); 175 rad/s (0.01)
+   above 800 rad/s: 2 modes carry 0.66 of mu; compliance f^H K^-1 f/|F|^2 = 1.540e-04 m/N; max p_r/(C w_r^2) = 0.89
+   lowest excited mode 58.7 rad/s: p = 0.472, compliance bound C w^2 = 0.530; participation below 60 rad/s 0.472, bound 60^2 C = 0.554; below 100: 0.472 vs 1.540
+   chain path springs [4, 5, 6, 7]: sum 1/k = 2.064e-04, path bound of lowest excited mode 0.711, max p/(path bound) over modes 0.66
+truss adj: P0=2.075e-04 P=8.871e-06 (x23.4) mu=2.00 gap [103, 681]; k at kmin 32, kmax 4; top modes: 846 rad/s (0.42); 1252 rad/s (0.38); 681 rad/s (0.05); 899 rad/s (0.04)
+   above 800 rad/s: 7 modes carry 0.88 of mu; compliance f^H K^-1 f/|F|^2 = 4.170e-05 m/N; max p_r/(C w_r^2) = 0.47
+   lowest excited mode 57.6 rad/s: p = 0.022, compliance bound C w^2 = 0.139; participation below 60 rad/s 0.041, bound 60^2 C = 0.150; below 100: 0.065 vs 0.417
+truss nonadj: P0=1.942e-04 P=6.142e-06 (x31.6) mu=2.00 gap [152, 624]; k at kmin 35, kmax 8; top modes: 1285 rad/s (0.39); 1136 rad/s (0.24); 28 rad/s (0.18); 873 rad/s (0.04)
+   above 800 rad/s: 7 modes carry 0.67 of mu; compliance f^H K^-1 f/|F|^2 = 5.087e-04 m/N; max p_r/(C w_r^2) = 0.94
+   lowest excited mode 27.8 rad/s: p = 0.369, compliance bound C w^2 = 0.392; participation below 60 rad/s 0.378, bound 60^2 C = 1.831; below 100: 0.441 vs 5.087

@@ -1,0 +1,2 @@
+reduced space: 30000 starts in 2218 s; lowest ten ['6.1421e-06', '6.2025e-06', '6.2025e-06', '6.2025e-06', '6.2025e-06', '6.2810e-06', '6.3472e-06', '6.3845e-06', '6.4021e-06', '6.4079e-06']; runs within 0.2% of the lowest: 1
+full-space polish of the 30 lowest: best 6.1421e-06 (from 6.1421e-06), asym 0.0e+00; five lowest after polish ['6.1421e-06', '6.2025e-06', '6.2025e-06', '6.2025e-06', '6.2025e-06']

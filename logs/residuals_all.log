@@ -1,5 +1,5 @@
 chain_k                  residual 9.3e-18
-chain_km                 residual 4.3e-11
+chain_km                 residual 6.1e-10
 chain_m                  residual 1.2e-09
 chain_relax_k_L0         residual 2.3e-10
 chain_relax_k_L1         residual 8.8e-08
@@ -20,11 +20,11 @@ chain_relax_m_L3         residual 2.8e-09
 chain_relax_m_L4         residual 0.0e+00
 chain_relax_m_L5         residual 0.0e+00
 pairs_chain_adj          residual 1.0e-10
-pairs_chain_nonadj       residual 4.2e-08
+pairs_chain_nonadj       residual 1.2e-08
 pairs_truss_adj          residual 3.1e-08
 pairs_truss_nonadj       residual 1.4e-08
 truss_k                  residual 8.3e-10
-truss_km                 residual 1.9e-07
+truss_km                 residual 2.8e-08
 truss_m                  residual 0.0e+00
 truss_relax_k_L0         residual 5.6e-09
 truss_relax_k_L1         residual 1.3e-07

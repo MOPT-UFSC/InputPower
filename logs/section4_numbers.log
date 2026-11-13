@@ -1,10 +1,10 @@
 === Table 1
-chain k  P=2.599e-06 P0/P=29 mu=1.00 gap [126,1226] Cor9 [251,358] P/mu=2.599e-06 s; distinct 39/52; max share inside gap 1.5e-03 at 177; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [ 177. 1226.] [ 126. 1226.] [  91. 1226.]; lowest excited 27.7; zero-share modes 5 (inside gap 3); m_load 1.00
-chain m  P=1.575e-06 P0/P=47 mu=0.20 gap [215,672] Cor9 [271,332] P/mu=7.873e-06 s; distinct 28/52; max share inside gap 0.0e+00 at 0; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [215. 672.] [215. 672.] [80. inf]; lowest excited 80.3; zero-share modes 0 (inside gap 0); m_load 5.00
-chain km P=2.215e-07 P0/P=337 mu=0.20 gap [75,1916] Cor9 [229,393] P/mu=1.107e-06 s; distinct 32/52; max share inside gap 5.9e-03 at 510; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [ 75. 510.] [  75. 1916.] [75. inf]; lowest excited 25.2; zero-share modes 0 (inside gap 0); m_load 5.00
-truss k  P=3.036e-06 P0/P=29 mu=1.00 gap [137,603] Cor9 [254,354] P/mu=3.036e-06 s; distinct 46/52; max share inside gap 2.1e-04 at 414; within 20%: 2.2e-06; gaps thr 1e-3/1e-2/1e-1: [137. 603.] [137. 603.] [  12. 1130.]; lowest excited 12.0; zero-share modes 18 (inside gap 9); m_load 1.00
-truss m  P=9.135e-07 P0/P=97 mu=0.20 gap [177,558] Cor9 [262,343] P/mu=4.567e-06 s; distinct 38/52; max share inside gap 2.7e-03 at 199; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [238. 558.] [177. 558.] [114.  inf]; lowest excited 31.0; zero-share modes 0 (inside gap 0); m_load 5.00
-truss km P=1.059e-07 P0/P=836 mu=0.20 gap [76,884] Cor9 [204,442] P/mu=5.297e-07 s; distinct 51/52; max share inside gap 2.6e-03 at 86; within 20%: 3.1e-07; gaps thr 1e-3/1e-2/1e-1: [ 86. 884.] [ 76. 884.] [36. inf]; lowest excited 10.3; zero-share modes 0 (inside gap 0); m_load 5.00
+chain k  P=2.599e-06 P0/P=29 mu=1.00 gap [126,1226] Cor9 [251,358] P/mu=2.599e-06 s; groups 37/52; max share inside gap 1.5e-03 at 177; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [ 177. 1226.] [ 126. 1226.] [  91. 1226.]; lowest excited 27.7; zero-share modes 5 (inside gap 3); m_load 1.00
+chain m  P=1.575e-06 P0/P=47 mu=0.20 gap [215,672] Cor9 [271,332] P/mu=7.873e-06 s; groups 26/52; max share inside gap 0.0e+00 at 0; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [215. 672.] [215. 672.] [80. nan]; lowest excited 80.3; zero-share modes 0 (inside gap 0); m_load 5.00
+chain km P=2.205e-07 P0/P=338 mu=0.20 gap [75,1913] Cor9 [229,393] P/mu=1.103e-06 s; groups 42/252; max share inside gap 5.9e-03 at 510; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [ 75. 510.] [  75. 1913.] [75. nan]; lowest excited 26.8; zero-share modes 1 (inside gap 1); m_load 5.00
+truss k  P=3.036e-06 P0/P=29 mu=1.00 gap [137,603] Cor9 [254,354] P/mu=3.036e-06 s; groups 44/52; max share inside gap 2.1e-04 at 414; within 20%: 2.2e-06; gaps thr 1e-3/1e-2/1e-1: [137. 603.] [137. 603.] [  12. 1130.]; lowest excited 12.0; zero-share modes 18 (inside gap 9); m_load 1.00
+truss m  P=9.135e-07 P0/P=97 mu=0.20 gap [177,558] Cor9 [262,343] P/mu=4.567e-06 s; groups 34/52; max share inside gap 2.7e-03 at 199; within 20%: 0.0e+00; gaps thr 1e-3/1e-2/1e-1: [238. 558.] [177. 558.] [114.  nan]; lowest excited 31.0; zero-share modes 0 (inside gap 0); m_load 5.00
+truss km P=8.458e-08 P0/P=1047 mu=0.20 gap [73,1048] Cor9 [195,461] P/mu=4.229e-07 s; groups 127/252; max share inside gap 1.9e-03 at 106; within 20%: 6.2e-19; gaps thr 1e-3/1e-2/1e-1: [ 106. 1048.] [  73. 1048.] [35. nan]; lowest excited 11.2; zero-share modes 0 (inside gap 0); m_load 5.00
 requirement B=[0.8w,1.2w], tau=1e-2: P/mu < 1.644e-06 s
 === relaxation last levels
 chain relax k  L0 P=4.442e-05 mu=1.000 gap [244.1, 393] top mode 737.8 rad/s share 0.51; m_load 1.00
@@ -16,7 +16,7 @@ chain relax km L5 P=3.368e-09 mu=0.100 gap [44.8, 2259] top mode 5.3 rad/s share
 truss relax k  L0 P=3.716e-05 mu=1.000 gap [262.5, 379] top mode 911.6 rad/s share 0.53; m_load 1.00
 truss relax k  L5 P=3.367e-06 mu=1.000 gap [16.9, 602] top mode 1329.0 rad/s share 0.40; m_load 1.00
 truss relax m  L0 P=5.740e-05 mu=0.909 gap [260.5, 380] top mode 486.7 rad/s share 0.19; m_load 1.10
-truss relax m  L5 P=3.190e-07 mu=0.084 gap [221.6, inf] top mode 24.2 rad/s share 0.80; m_load 11.84
+truss relax m  L5 P=3.190e-07 mu=0.084 gap [221.6, nan] top mode 24.2 rad/s share 0.80; m_load 11.84
 truss relax km L0 P=2.602e-05 mu=0.909 gap [255.0, 379] top mode 883.1 rad/s share 0.47; m_load 1.10
 truss relax km L5 P=1.489e-09 mu=0.050 gap [24.9, 1552] top mode 1.5 rad/s share 0.97; m_load 19.90
 === escape k: two factors of the slack
@@ -54,6 +54,6 @@ km truss s=10000: share 6.1e-10 bound 1.9e-08 bound/share 3.2e+01 P_B/P 3.94e-02
   km s=3000: 12 modes, 314-610 rad/s, shares 5e-21-3e-09
   km s=10000: 12 modes, 314-610 rad/s, shares 3e-20-3e-10
   Table1 chain k: 1 modes 508-508 rad/s shares 1e-30-1e-30
-  Table1 chain km: 1 modes 508-508 rad/s shares 9e-06-9e-06
+  Table1 chain km: 2 modes 439-509 rad/s shares 6e-21-3e-19
   Table1 truss k: 8 modes 275-585 rad/s shares 1e-34-2e-06
-  Table1 truss km: 7 modes 284-622 rad/s shares 2e-09-3e-06
+  Table1 truss km: 7 modes 267-649 rad/s shares 6e-19-5e-07
