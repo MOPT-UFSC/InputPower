@@ -1,4 +1,4 @@
-# Modal participation bounds for active input power minimization
+# Modal participation bounds for active input power minimization in discrete vibrating structures
 
 Code, results and supplementary data for the manuscript (repository: https://github.com/MOPT-UFSC/InputPower)
 
