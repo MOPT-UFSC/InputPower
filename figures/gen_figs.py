@@ -27,13 +27,13 @@ def relax_panel(name, vs, title, legname=None):
         s += "  \\addplot[%s] table[x=w, y=P] {\\datapath n_relax_%s_%s_L%d.dat};%s\n" % (LV[L], name, vs, L, le(labs[L]))
     for L in range(n):
         s += "  \\addplot[%s, only marks, mark=*, mark size=1.1pt, forget plot] table[x=wr, y expr=10^(-10.7+0.3*%d)] {\\datapath n_relaxmodes_%s_%s_L%d.dat};\n" % (LV[L], L, name, vs, L)
-    s += VLINE % ("1e-11", "1e-1")
+    s += VLINE % ("1e-11", "1e0")
     return s
 
 
 def fig_relax():
-    s = "\\begin{tikzpicture}\n\\begin{groupplot}[group style={group size=2 by 3, horizontal sep=1.6cm, vertical sep=2.4cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\\textwidth, height=0.32\\textwidth,\n"
-    s += "  xmode=log, ymode=log, xmin=5, xmax=3000, ymin=1e-11, ymax=1e-1, xlabel={$\\omega$ [rad/s]}, ylabel={$P(\\omega)$ [W]},\n"
+    s = "\\begin{tikzpicture}\n\\begin{groupplot}[group style={group size=2 by 3, horizontal sep=1.6cm, vertical sep=2.1cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\\textwidth, height=0.35\\textwidth,\n"
+    s += "  xmode=log, ymode=log, xmin=5, xmax=3000, ymin=1e-11, ymax=1e0, ytick={1e-10,1e-8,1e-6,1e-4,1e-2,1e0}, xlabel={$\\omega$ [rad/s]}, ylabel={$P(\\omega)$ [W]},\n"
     s += "  title style={font=\\footnotesize}, legend style={font=\\scriptsize, draw=none, fill=none}]\n"
     s += relax_panel("chain", "k", "(a) chain, springs only")
     s += relax_panel("truss", "k", "(b) truss, bars only", "legk")
@@ -59,7 +59,7 @@ def fig_escape_freq():
     for row, mode in enumerate(["k", "m", "km"]):
         for col, name in enumerate(["chain", "truss"]):
             lab = "(%s) %s, %s" % ("abcdef"[2 * row + col], name, MODE_LAB[mode])
-            ymin, ymax = ("0.3", "3e5") if mode == "k" else ("0.1", "3e3")
+            ymin, ymax = {"k": ("0.1", "5e5"), "m": ("0.1", "3e3"), "km": ("0.05", "1e4")}[mode]
             first = (row == 0 and col == 0)
             s += "\\nextgroupplot[title={%s}, ymin=%s, ymax=%s%s]\n" % (lab, ymin, ymax, ", legend to name=legfreq, legend columns=-1" if first else "")
             le = (lambda t: " \\addlegendentry{%s}" % t) if first else (lambda t: "")
@@ -80,9 +80,9 @@ def fig_escape_P():
     for row, mode in enumerate(["k", "m", "km"]):
         for col, name in enumerate(["chain", "truss"]):
             lab = "(%s) %s, %s" % ("abcdef"[2 * row + col], name, MODE_LAB[mode])
-            ymin = "1e-10" if mode == "k" else "1e-18"; first = (mode == "km" and col == 0)
+            ymin, ymax = {"k": ("1e-14", "1e3"), "m": ("1e-13", "1e1"), "km": ("1e-11", "1e1")}[mode]; first = (mode == "km" and col == 0)
             le = (lambda t: " \\addlegendentry{%s}" % t) if first else (lambda t: "")
-            s += "\\nextgroupplot[title={%s}, ymin=%s, ymax=10%s]\n" % (lab, ymin, ", legend to name=legP, legend columns=3" if first else "")
+            s += "\\nextgroupplot[title={%s}, ymin=%s, ymax=%s%s]\n" % (lab, ymin, ymax, ", legend to name=legP, legend columns=3" if first else "")
             s += "  \\addplot[blue!70!black, thick, mark=*, mark size=1.2pt] table[x=s, y=Pn] {\\datapath n_escape_%s_%s_opt.dat};%s\n" % (mode, name, le("$P/P_0$, optimized"))
             s += "  \\addplot[orange!80!black, thick, mark=square*, mark size=1.1pt] table[x=s, y=Pn] {\\datapath n_escape_%s_%s_exp.dat};%s\n" % (mode, name, le("$P/P_0$, explicit family"))
             if mode != "k":
@@ -114,14 +114,14 @@ def fig_escape_spec():
 
 def fig_pairs():
     s = "\\begin{tikzpicture}\n\\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.6cm, vertical sep=1.5cm, xlabels at=edge bottom, ylabels at=edge left}, width=0.5\\textwidth, height=0.34\\textwidth,\n"
-    s += "  ymode=log, xmin=0, xmax=1500, ymin=1e-6, ymax=1.5, xlabel={$\\omega_r$ [rad/s]}, ylabel={$p_r/\\mu_{\\bm f}$}, title style={font=\\footnotesize}, legend style={font=\\scriptsize, draw=none, fill=none}]\n"
+    s += "  ymode=log, log origin=infty, xmin=0, xmax=1500, ymin=1e-6, ymax=3, xlabel={$\\omega_r$ [rad/s]}, ylabel={$p_r/\\mu_{\\bm f}$}, x tick label style={/pgf/number format/1000 sep={}}, title style={font=\\footnotesize}, legend style={font=\\scriptsize, draw=none, fill=none}]\n"
     for lab, name, tag in [("(a) chain, adjacent pair $\\bm e_6-\\bm e_7$", "chain", "adj"), ("(b) truss, adjacent pair, nodes 16 and 17", "truss", "adj"),
                            ("(c) chain, pair $\\bm e_4-\\bm e_8$", "chain", "nonadj"), ("(d) truss, pair, nodes 14 and 18", "truss", "nonadj")]:
         first = tag == "adj" and name == "chain"   # one shared legend below the panels
         le = (lambda q: " \\addlegendentry{%s}" % q) if first else (lambda q: "")
         s += "\\nextgroupplot[title={%s}%s]\n" % (lab, ", legend to name=legpairs, legend columns=-1" if first else "")
         s += "  \\addplot[ycomb, blue!60!black, thick, mark=*, mark size=1.3pt] table[x=wr, y=share] {\\datapath n_pairs_%s_%s_modes.dat};%s\n" % (name, tag, le("final design"))
-        s += "  \\addplot[red!70!black, dashed] coordinates {(300,1e-6) (300,1.5)};%s\n" % le("$\\omega$")
+        s += "  \\addplot[red!70!black, dashed] coordinates {(300,1e-6) (300,3)};%s\n" % le("$\\omega$")
     s += "\\end{groupplot}\n\\node[anchor=north] at ($(group c1r2.south west)!0.5!(group c2r2.south east)$) [yshift=-1.0cm] {\\pgfplotslegendfromname{legpairs}};\n\\end{tikzpicture}\n"
     open(os.path.join(HERE, "fig_pairs.tex"), "w").write(s)
 
