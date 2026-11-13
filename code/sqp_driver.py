@@ -76,8 +76,9 @@ def random_start(model, vary_k, vary_m, k_bounds, m_bounds, rng):
     return k, m
 
 
-def multistart(model, vary_k, vary_m, k_bounds, m_bounds, starts, n_random=50, seed=11, **kw):
-    """Runs run_sqp from the given named starts [(name, k, m), ...] and from n_random random starts; returns the best
+def multistart(model, vary_k, vary_m, k_bounds, m_bounds, starts, n_random=50, seed=11, n_sym=0, **kw):
+    """Runs run_sqp from the given named starts [(name, k, m), ...], from n_random random starts and from n_sym
+    mirror-symmetric random starts (average of a random design and its mirror, rescaled to the budgets); returns the best
     (k, m, P, hist, name) and the sorted list of all final powers."""
     rng = np.random.default_rng(seed); runs = []
     for name, ks, ms in starts:
@@ -85,5 +86,13 @@ def multistart(model, vary_k, vary_m, k_bounds, m_bounds, starts, n_random=50, s
     for i in range(n_random):
         ks, ms = random_start(model, vary_k, vary_m, k_bounds, m_bounds, rng)
         k, m, P, hist, info = run_sqp(model, vary_k, vary_m, k_bounds, m_bounds, ks, ms, **kw); runs.append((P, k, m, hist, "random %d" % i))
+    if n_sym:   # mirror-symmetric random starts (for problems invariant under the mirror about the loaded point)
+        from models import mirror_maps
+        mk, mm = mirror_maps(model); rng2 = np.random.default_rng(seed + 1000)
+        for i in range(n_sym):
+            ks, ms = random_start(model, vary_k, vary_m, k_bounds, m_bounds, rng2)
+            if vary_k: ks = 0.5 * (ks + ks[mk]); ks = ks * np.sum(model["k0"]) / ks.sum()
+            if vary_m: ms = 0.5 * (ms + ms[mm]); ms = ms * np.sum(model["m0"]) / ms.sum()
+            k, m, P, hist, info = run_sqp(model, vary_k, vary_m, k_bounds, m_bounds, ks, ms, **kw); runs.append((P, k, m, hist, "symmetric random %d" % i))
     runs.sort(key=lambda z: z[0]); P, k, m, hist, name = runs[0]
     return k, m, P, hist, name, np.array([z[0] for z in runs])

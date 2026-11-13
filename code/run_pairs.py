@@ -47,7 +47,12 @@ def checks(model):
 
 
 def minimise_pair(model, tag, fv):
-    md = with_load(model, fv); k, m, P, hist, sname, allP = multistart(md, True, False, KB, (1, 1), [("initial", None, None)], n_random=50)
+    md = with_load(model, fv)
+    # the non-adjacent antiphase pair is mirrored into minus itself, so that problem is mirror-symmetric: 200 symmetric random starts are added
+    starts = [("initial", None, None)]
+    fs = os.path.join(OUT, "symsearch_pairs_%s_%s.npz" % (model["name"], tag))   # reduced-space symmetric search (symmetry_truss_nonadj.py)
+    if os.path.exists(fs): starts.append(("symmetric reduced-space search", np.load(fs)["k"], None))
+    k, m, P, hist, sname, allP = multistart(md, True, False, KB, (1, 1), starts, n_random=50, n_sym=200 if tag == "nonadj" else 0)
     print("   %d starts, %d groups of final power values, best from %s" % (len(allP), count_groups(allP), sname), flush=True)
     wr, p, mu = modes(md, k, m); lo, hi = excited_gap(wr, p, mu); P0 = power_and_grads(md, md["k0"], md["m0"])[0]
     np.savez(os.path.join(OUT, "pairs_%s_%s.npz" % (model["name"], tag)), k=k, m=m, P=P, P0=P0, hist=hist, all_P=allP, start=sname, wr=wr, p=p, mu=mu, lo=lo, hi=hi, f=fv,

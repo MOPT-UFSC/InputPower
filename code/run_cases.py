@@ -10,6 +10,7 @@ from sqp_driver import run_sqp, multistart, random_start
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results"); os.makedirs(OUT, exist_ok=True)
 WS = np.geomspace(5, 3000, 2500)
 KB = (1e4, 5e5)                                   # reference box for stiffness
+N_SYM = 200                                       # mirror-symmetric random starts for the mirror-symmetric k+m problem
 K_LEVELS = [1e5, 3e4, 1e4, 3e3, 1e3, 3e2]
 N_RANDOM = 50
 M_LEVELS = {"chain": [(0.9, 1.1), (0.5, 2.0), (0.25, 4.0), (0.125, 8.0), (0.1, 10.0), (0.1, 10.9)],
@@ -46,7 +47,7 @@ def case_single(model, tag):
             fs = os.path.join(OUT, "sym_best_%s.npz" % model["name"])
             if os.path.exists(fs): starts.append(("symmetric multi-start", np.load(fs)["k"], None))
             else: print("   note: %s not found; run run_sym_multistart.py 200 first to include the symmetric start of Table 1" % fs, flush=True)
-        k, m, P, hist, sname, allP = multistart(model, vk, vm, KB, (0.1, 5.0), starts, n_random=N_RANDOM)
+        k, m, P, hist, sname, allP = multistart(model, vk, vm, KB, (0.1, 5.0), starts, n_random=N_RANDOM, n_sym=N_SYM if (vk and vm) else 0)   # the k+m problem is mirror-symmetric
         nd = count_groups(allP)
         print("   %s %s: %d starts, %d groups of final power values, best from %s" % (tag, vs, len(allP), nd, sname), flush=True)
         save("%s_%s" % (tag, vs), model, k, m, P, hist, extra={"start": sname, "all_P": allP})
