@@ -2,7 +2,7 @@
 
 Code, results and supplementary data for the manuscript (repository: https://github.com/MOPT-UFSC/InputPower)
 
-> O. M. Silva, E. L. Cardoso, M. M. Neves, A. Lenzi, *Modal participation bounds for active input power minimization in vibrating structures*, submitted to the Journal of Sound and Vibration (2026).
+> O. M. Silva, R. Z. Mikulski, E. L. Cardoso, M. M. Neves, A. Lenzi, *Modal participation bounds for active input power minimization in discrete vibrating structures*, submitted to the Journal of Sound and Vibration (2026).
 
 The manuscript proves a band participation inequality for the active input power of a harmonic load on a discrete structure with proportional damping, and studies the spectral paths along which the power can vanish. The numerical part illustrates the results on two systems, a fixed-fixed mass-spring chain (11 masses, 12 springs) and a planar truss (11 × 2 lumped masses, 51 bars, 36 degrees of freedom), with the analysis frequency ω = 300 rad/s, hysteretic damping η = 0.02 and a unit point force at the central mass or at the top mid-span node. All minimizations use a single method, SciPy's SLSQP on the logarithms of the design variables, with the stiffness and mass budgets as explicit equality constraints.
 
@@ -40,7 +40,7 @@ python -m zipfile -e supplement/data_.zip supplement
 python -m zipfile -e figures/data.zip figures/data
 ```
 
-The first archive holds 60 files (`code/results/*.npz`, `*.npy`), the second 134 CSV files (`supplement/*.csv`), the third 169 data files (`figures/data/*.dat`). A script that needs a result that is not there stops with the extraction command above, or names the script that produces the file.
+The first archive holds 61 files (`code/results/*.npz`, `*.npy`), the second 134 CSV files (`supplement/*.csv`), the third 169 data files (`figures/data/*.dat`). A script that needs a result that is not there stops with the extraction command above, or names the script that produces the file.
 
 ## Two ways of using the repository
 
@@ -62,6 +62,7 @@ The first archive holds 60 files (`code/results/*.npz`, `*.npy`), the second 134
 ```
 OMP_NUM_THREADS=2 python run_sym_multistart.py 200          # symmetric start of Table 1 -> results/sym_best_*.npz
 OMP_NUM_THREADS=2 python run_cases.py chain_single truss_single chain_relax truss_relax
+python symmetry_truss_nonadj.py 30000                      # symmetric start of the truss non-adjacent pair -> results/symsearch_pairs_truss_nonadj.npz
 python run_pairs.py
 python escape_seq.py k ; python escape_seq.py m ; python escape_seq.py km
 python run_disp.py ; python run_fullspace_starts.py
@@ -91,12 +92,12 @@ Each entry gives the section, table or figure of the paper, the script, its argu
 | Section 4.1, gradient check and Fig. 3 (modal decomposition, proportional and non-proportional damping) | `export_paper.py` (gradient check is printed at the start of `run_cases.py`) | `figures/data/n_terms_*.dat`, `n_nonprop_*.dat` | `export_paper.log` |
 | Section 4.1, modal sum, participation total and sum rule for five loads | `section4_numbers.py` | printed | `section4_numbers.log` |
 | Remark 1 (Caughey series, prescribed modal ratios) and the dashpot counterexample of Section 5 | `classical_damping.py` | printed | `classical_damping.log` |
-| **Table 1** and Fig. 4: constrained minimization with stiffness, mass or both; 52 starts per problem | `run_cases.py chain_single truss_single` | `results/chain_k.npz`, `chain_m.npz`, `chain_km.npz`, `truss_*.npz` (keys below) | `sqp_single.log`; groups recounted in `recount_groups.log` |
+| **Table 1** and Fig. 4: constrained minimization with stiffness, mass or both; 52 starts per problem, plus 200 mirror-symmetric random starts for the mirror-symmetric problem with both families | `run_cases.py chain_single truss_single` | `results/chain_k.npz`, `chain_m.npz`, `chain_km.npz`, `truss_*.npz` (keys below) | `sqp_single.log` (first campaign), `sqp_single_sym.log` (with the symmetric starts; the stiffness-and-mass rows of Table 1); groups in `recount_groups.log` |
 | Symmetric start used in Table 1 for the stiffness-only problems (200 random starts over mirror-symmetric designs) | `run_sym_multistart.py 200` (uses `run_symmetric.py`) | `results/sym_best_chain.npz`, `sym_best_truss.npz` | in `sqp_single.log` |
 | Section 4.2, 300 random starts in the full space (stiffness only) | `run_fullspace_starts.py` | `results/fullspace_chain.npy`, `fullspace_truss.npy` | `fullspace.log` |
 | Section 4.2, displacement objectives \|u₆\| and \|u₉\| on the chain, 31 starts each | `run_disp.py` | `results/disp_u6.npz`, `disp_u9.npz` | `sqp_disp.log` |
 | **Fig. 5**: relaxation sweeps by continuation (six levels of the bounds, three variable sets) | `run_cases.py chain_relax truss_relax` | `results/*_relax_{k,m,km}_L0..L5.npz` | `sqp_relax.log` |
-| Section 4.3 and **Fig. 6**: adjacent and non-adjacent antiphase pairs, 51 starts | `run_pairs.py`, numbers quoted in the text by `pairs_numbers.py` | `results/pairs_{chain,truss}_{adj,nonadj}.npz`, `pairs_checks.npy` | `sqp_pairs.log` |
+| Section 4.3 and **Fig. 6**: adjacent and non-adjacent antiphase pairs, 51 starts; for the mirror-symmetric non-adjacent pairs, 200 mirror-symmetric random starts and, on the truss, the best design of `symmetry_truss_nonadj.py 30000` (reduced-space symmetric search) | `run_pairs.py`, numbers quoted in the text by `pairs_numbers.py` | `results/pairs_{chain,truss}_{adj,nonadj}.npz`, `symsearch_pairs_truss_nonadj.npz`, `pairs_checks.npy` | `sqp_pairs.log`, `sqp_pairs_sym.log`, `symmetry_truss_nonadj.log` |
 | Section 4.4 and **Figs. 7, 8, 9**: unbounded escape sequences, s = 1 … 10⁵, optimized and explicit designs | `escape_seq.py k`, `escape_seq.py m`, `escape_seq.py km` | `results/escape_seq_{k,m,km}.npy` | `sqp_escape_{k,m,km}.log` |
 | **Table 2**: verification of ten representative designs | `verify_extreme.py` | `code/verify_extreme_table.tex`, printed | `verify_extreme.log` |
 | Section 4.4, error of the modal sum along the sequences | `modal_errors.py` | printed | `modal_errors.log` |
@@ -105,7 +106,7 @@ Each entry gives the section, table or figure of the paper, the script, its argu
 | Section 4.5: minimization with a truncated modal basis (participation threshold 10⁻² or 10⁻³) | `escape_trunc.py k 1e-2`, `escape_trunc.py k 1e-3`, `escape_trunc.py km 1e-2` | `results/escape_trunc_{k,km}_thr*.npy` | `trunc_{k,km}_1e-*.log` |
 | Supplementary material | `export_supplement.py` (writes to `../supplement/`), checked by `supplement_check.py` | `supplement/*.csv` | |
 
-Diagnostic plots (not in the paper): `escape_spectra.py k|m|km` draws the input-power spectra of the escape sequences with Matplotlib; `summarise.py [prefix]` tabulates every `results/*.npz`. `run_cases.py` also has a case `truss_directions` (point force at 0°, 45° and 90°) that is not reported in the paper.
+Symmetry checks: `symmetry_audit.py` reports the mirror asymmetry of the Table 1 designs, `symmetry_km.py` and `symmetry_convergence.py` are the searches from mirror-symmetric starts that motivated the symmetric starts above and measure how the best value moves with their number (logs `symmetry_km.log`, `symmetry_convergence.log`, `symmetry_truss_nonadj_3000.log`). Diagnostic plots (not in the paper): `escape_spectra.py k|m|km` draws the input-power spectra of the escape sequences with Matplotlib; `summarise.py [prefix]` tabulates every `results/*.npz`. `run_cases.py` also has a case `truss_directions` (point force at 0°, 45° and 90°) that is not reported in the paper.
 
 ### Result file formats
 
